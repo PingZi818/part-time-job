@@ -1,0 +1,15 @@
+.task-box {
+  display: grid;
+  grid-template-columns: 22vw 22vw 22vw;
+  grid-auto-rows: 10vh;
+  grid-row-gap: 4vh;
+  grid-column-gap: 4vh;
+}
+.task-item {
+  background: #61b4c6;
+  display: inline-block;
+  line-height: 10vh;
+  font-size: 2.8rem;
+  border-radius: 6px;
+  color: #fff;
+}

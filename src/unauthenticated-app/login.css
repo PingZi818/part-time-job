@@ -1,0 +1,42 @@
+.adm-form {
+  border: none !important;
+  --border-top: none !important;
+  --border-bottom: none !important;
+}
+.adm-list-item-content {
+  border-bottom: solid 2px #61b4c6;
+  border-top: none !important;
+  margin-top: 1vw;
+}
+.adm-list-item-content-prefix {
+  width: 3vw;
+}
+.adm-input-element {
+  font-size: 3rem;
+  font-weight: 200;
+  color: #b2b2b2;
+}
+.adm-list-item-content-main {
+  padding: 1vw;
+}
+.adm-form-item.adm-form-item-horizontal .adm-list-item-content-prefix {
+  padding: 1vw 0;
+}
+.adm-form-item-label {
+  text-align: left;
+}
+.adm-form-item-feedback-error {
+  text-align: left;
+}
+.form-box {
+  position: relative;
+  padding: 1vw 1vw 3vw 1vw;
+  padding-top: 10px;
+  border-radius: 1.5rem;
+  border: solid 2px #61b4c6;
+}
+.user-icon,
+.user-password {
+  width: 35px;
+  height: 37px;
+}
