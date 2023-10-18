@@ -1,0 +1,68 @@
+.arrow-left {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+  margin-left: 3vw;
+}
+.arrow-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+  margin-right: 3vw;
+}
+.task-content .task-item {
+  cursor: pointer;
+  width: 35vw;
+  background: #61b4c6;
+  display: inline-block;
+  line-height: 10vh;
+  font-size: 2.8rem;
+  border-radius: 6px;
+  color: #fff;
+}
+.content {
+  display: inline-block;
+  font-size: 2.8rem;
+  border-radius: 6px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  user-select: none;
+}
+.adm-page-indicator-dot-active {
+  background: #61b4c6;
+}
+.adm-swiper-track {
+  margin-bottom: 4vh;
+}
+.adm-page-indicator {
+  --dot-size: 16px;
+  --active-dot-size: 46px;
+  --dot-border-radius: 8px;
+  --dot-spacing: 10px;
+}
+.child-task .return-box {
+  position: absolute;
+  width: 12vw;
+  height: 6vh;
+  background: #61b4c6;
+  left: 5vw;
+  /* top: 3.6vh; */
+  border: none;
+  letter-spacing: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.child-task .return-box .return-text {
+  text-align: left;
+  font-size: 2.8rem;
+  line-height: 4vh;
+}

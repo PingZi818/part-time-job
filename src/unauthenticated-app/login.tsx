@@ -9,22 +9,6 @@ import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import { useAsync } from "utils/use-async";
 import "./login.css";
 import styled from "@emotion/styled";
-
-// interface Base {
-//   id: number
-// }
-//
-// interface Advance extends Base {
-//   name: string
-// }
-//
-// const test = (p: Base) => {
-// }
-//
-// // 鸭子类型(duck typing)：面向接口编程 而不是 面向对象编程
-// const a = {id: 1, name: 'jack'}
-// test(a)
-// const apiUrl = process.env.REACT_APP_API_URL;
 const eye = css`
   padding: 4px;
   cursor: pointer;
@@ -43,8 +27,8 @@ export const LoginScreen = ({
   const [visible, setVisible] = useState(false);
   // HTMLFormElement extends Element
   const handleSubmit = async (values: {
-    username: string;
-    password: string;
+    userName: string;
+    userPassword: string;
   }) => {
     try {
       await run(login(values));

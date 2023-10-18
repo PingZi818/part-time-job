@@ -1,15 +1,32 @@
-.task-box {
-  display: grid;
-  grid-template-columns: 22vw 22vw 22vw;
-  grid-auto-rows: 10vh;
-  grid-row-gap: 4vh;
-  grid-column-gap: 4vh;
-}
 .task-item {
+  width: 22vw;
   background: #61b4c6;
   display: inline-block;
   line-height: 10vh;
   font-size: 2.8rem;
   border-radius: 6px;
   color: #fff;
+}
+.content {
+  display: inline-block;
+  font-size: 2.8rem;
+  border-radius: 6px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  user-select: none;
+}
+.adm-page-indicator-dot-active {
+  background: #61b4c6;
+}
+.adm-swiper-track {
+  margin-bottom: 4vh;
+}
+.adm-page-indicator {
+  --dot-size: 16px;
+  --active-dot-size: 46px;
+  --dot-border-radius: 8px;
+  --dot-spacing: 10px;
 }

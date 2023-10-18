@@ -1,0 +1,97 @@
+.step-box .return-box {
+  width: 12vw;
+  height: 6vh;
+  background: #57626b;
+  border: none;
+  letter-spacing: 18px;
+}
+.main-content-bottom {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.main-content-bottom .step-item-list {
+  padding: 2vh;
+}
+.step-item-list {
+  width: 100%;
+  padding-top: 5vh;
+}
+.step-item-list .active-step-item {
+  background: #61b4c6;
+}
+.step-box .next-box {
+  width: 12vw;
+  height: 6vh;
+  background: #57626b;
+  border: none;
+}
+.get-number-btn {
+  width: 12vw;
+  height: 6vh;
+  background: #61b4c6;
+  border: none;
+}
+.step-box .middle-box {
+  width: 16vw;
+  height: 6vh;
+  background: #61b4c6;
+  border: none;
+}
+.step-box .primary-box {
+  height: 6vh;
+  background: #61b4c6;
+  border: none;
+}
+.text-align-left {
+  text-align: left;
+}
+.font-size-46 {
+  font-size: 4.6rem;
+}
+.font-size-28 {
+  font-size: 2.8rem;
+}
+.phone-input-label {
+  font-size: 4.6rem;
+  text-align: left;
+}
+.step-box .phone-input,
+.step-box .phone-input .adm-input,
+.step-box .adm-input-element {
+  height: 100%;
+  border: solid 1px #61b4c6;
+  border-radius: 6px;
+}
+.complete-text {
+  width: 100%;
+  text-align: center;
+  font-size: 4.8rem;
+  font-weight: 600;
+}
+.number-key-board-content {
+  outline: solid 4px #61b4c6;
+}
+.adm-grid-item .keyword-btn {
+  padding: 1vw;
+  background: #61b4c6;
+  color: #fff;
+  font-size: 36px;
+  border-radius: 8px;
+  border: none;
+}
+.modal-header {
+  position: relative;
+}
+.modal-header .return-box {
+  width: 12vw;
+  height: 6vh;
+  background: #57626b;
+  border: none;
+  margin-bottom: 2vw;
+}
+.modal-number-list {
+  margin-top: 20px;
+}

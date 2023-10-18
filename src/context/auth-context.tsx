@@ -1,6 +1,5 @@
 import React, { ReactNode, useCallback } from "react";
 import * as auth from "auth-provider";
-import { http } from "utils/http";
 import { useMount } from "utils";
 import { useAsync } from "utils/use-async";
 import { FullPageErrorFallback, FullPageLoading } from "components/lib";
@@ -8,16 +7,20 @@ import { User } from "types/user";
 import { useQueryClient } from "react-query";
 
 interface AuthForm {
-  username: string;
-  password: string;
+  userName: string;
+  userPassword: string;
 }
 
 const bootstrapUser = async () => {
   let user = null;
   const token = auth.getToken();
   if (token) {
-    const data = await http("me", { token });
-    user = data.user;
+    user = {
+      userId: "1001",
+      userName: "1001",
+      userType: "",
+      userToken: "8c639b4bba823e1c3d358e8bd1effef2",
+    };
   }
   return user;
 };
@@ -25,7 +28,6 @@ const bootstrapUser = async () => {
 const AuthContext = React.createContext<
   | {
       user: User | null;
-      register: (form: AuthForm) => Promise<void>;
       login: (form: AuthForm) => Promise<void>;
       logout: () => Promise<void>;
     }
@@ -47,7 +49,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // point free
   const login = (form: AuthForm) => auth.login(form).then(setUser);
-  const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () =>
     auth.logout().then(() => {
       setUser(null);
@@ -69,10 +70,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider
-      children={children}
-      value={{ user, login, register, logout }}
-    />
+    <AuthContext.Provider children={children} value={{ user, login, logout }} />
   );
 };
 

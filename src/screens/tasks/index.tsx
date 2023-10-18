@@ -1,19 +1,13 @@
 import React from "react";
-import { useDebounce, useDocumentTitle } from "utils";
+import { useDocumentTitle } from "utils";
 import { useTasks } from "utils/task";
 import { CardContent, CardTitle, Title } from "components/lib";
-import { useTasksSearchParams } from "./util";
 import { List } from "screens/tasks/list";
 import "./task.css";
 import styled from "@emotion/styled";
 export const TasksScreen = () => {
-  useDocumentTitle("项目列表", false);
-
-  // const { open } = useProjectModal();
-
-  const [param, setParam] = useTasksSearchParams();
-  const { isLoading, error, data: list } = useTasks(useDebounce(param, 200));
-
+  useDocumentTitle("事项分类", false);
+  const { isLoading, data: list } = useTasks();
   return (
     <>
       <CardTitle>
@@ -26,5 +20,7 @@ export const TasksScreen = () => {
   );
 };
 const CardContentBox = styled(CardContent)`
+  position: relative;
   justify-content: center;
+  padding-top: 4vh;
 `;

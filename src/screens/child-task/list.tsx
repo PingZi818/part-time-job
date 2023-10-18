@@ -1,15 +1,14 @@
 import React, { useRef, useState } from "react";
-import { Task } from "types/task";
-import { AutoCenter, Image, Grid, Space, Swiper, Toast } from "antd-mobile";
+import { ChildTask } from "types/task";
+import { AutoCenter, Image, Grid, Swiper } from "antd-mobile";
 import { SwiperRef } from "antd-mobile/es/components/swiper";
-import { Link } from "react-router-dom";
 import leftArrowSrc from "assets/left-arrow.png";
 import rightArrowSrc from "assets/right-arrow.png";
+import { Link } from "react-router-dom";
 interface ListProps {
-  tasks: Task[];
-  loading: Boolean;
+  tasks: ChildTask[];
 }
-function getNewArr(arr: Task[], n: number) {
+function getNewArr(arr: ChildTask[], n: number) {
   let newArr = [];
   for (let i = 0; i < arr.length; i += n) {
     newArr.push(arr.slice(i, i + n));
@@ -17,8 +16,8 @@ function getNewArr(arr: Task[], n: number) {
   return newArr;
 }
 
-export const List = ({ tasks, loading }: ListProps) => {
-  const NewList = getNewArr(tasks, 9);
+export const List = ({ tasks }: ListProps) => {
+  const NewList = getNewArr(tasks, 6);
   const ref = useRef<SwiperRef>(null);
   const [currentSwiperIndex, setCurrentSwiperIndex] = useState(0);
 
@@ -27,13 +26,16 @@ export const List = ({ tasks, loading }: ListProps) => {
   };
   const items = NewList.map((group, index) => (
     <Swiper.Item key={index}>
-      <div className="content">
-        <Grid columns={3} gap={"4vh"} className="task-box">
+      <div className="task-content content">
+        <Grid columns={2} gap={"4vh"} className="task-box">
           {group.map((task) => {
             return (
-              <Link to={`tasks/${String(task.id)}`} key={task.id}>
+              <Link
+                to={`step/${String(task.businessId)}`}
+                key={task.businessId}
+              >
                 <Grid.Item className="task-item" onClick={() => {}}>
-                  <AutoCenter>{task.kindName}</AutoCenter>
+                  <AutoCenter>{task.businessName}</AutoCenter>
                 </Grid.Item>
               </Link>
             );

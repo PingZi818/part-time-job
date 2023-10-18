@@ -1,7 +1,14 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { Spin, Typography } from "antd";
-import { Button, Card } from "antd-mobile";
+import { Spin } from "antd";
+import zhCN from "antd-mobile/es/locales/zh-CN";
+import {
+  Button,
+  Card,
+  AutoCenter,
+  ErrorBlock,
+  ConfigProvider,
+} from "antd-mobile";
 import loginLogo from "assets/login-logo.png";
 import loginBg from "assets/login-bg.png";
 import loginContentBg from "assets/login-content.png";
@@ -51,7 +58,12 @@ const isError = (value: any): value is Error => value?.message;
 
 export const ErrorBox = ({ error }: { error: unknown }) => {
   if (isError(error)) {
-    return <Typography.Text type={"danger"}>{error?.message}</Typography.Text>;
+    return (
+      <ConfigProvider locale={zhCN}>
+        {/* <ErrorBlock status='disconnected' /> */}
+        {error}
+      </ConfigProvider>
+    );
   }
   return null;
 };
@@ -68,12 +80,13 @@ export const ScreenContainer = styled.div`
   width: 100%;
   padding-top: 2rem;
 `;
-export const Title = styled.div`
+export const Title = styled(AutoCenter)`
   padding: 1.5rem 0;
   color: rgb(255, 255, 255);
   font-size: 60px;
 `;
 export const CardTitle = styled.div`
+  position: relative;
   text-align: center;
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 `;

@@ -9,43 +9,31 @@ const localStorageKey = "__auth_provider_token__";
 
 export const getToken = () => window.localStorage.getItem(localStorageKey);
 
-export const handleUserResponse = (data: { user: User }) => {
-  window.localStorage.setItem(localStorageKey, data.user.token || "");
-  return data.user;
+export const handleUserResponse = (data: User) => {
+  window.localStorage.setItem(localStorageKey, data.userToken || "");
+  return data;
 };
 
-export const login = (data: { username: string; password: string }) => {
+export const login = (data: { userName: string; userPassword: string }) => {
   const text = "JueJin2022";
   const enc = setEncrypt(text);
   console.log(enc);
-  return fetch(`${apiUrl}/login`, {
+  const loginFormParam = {
+    ...data,
+    userType: "DEVICE",
+  };
+  return fetch(`${apiUrl}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(loginFormParam),
   }).then(async (response) => {
     const res = await response.json();
     if (response.ok) {
       return handleUserResponse(res.data);
     } else {
       return Promise.reject(res);
-    }
-  });
-};
-
-export const register = (data: { username: string; password: string }) => {
-  return fetch(`${apiUrl}/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(async (response) => {
-    if (response.ok) {
-      return handleUserResponse(await response.json());
-    } else {
-      return Promise.reject(await response.json());
     }
   });
 };

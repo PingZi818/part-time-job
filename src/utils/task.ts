@@ -1,63 +1,18 @@
 import { useHttp } from "utils/http";
-import { QueryKey, useMutation, useQuery } from "react-query";
-import { Task } from "types/task";
-import {
-  useAddConfig,
-  useDeleteConfig,
-  useEditConfig,
-  useReorderTaskConfig,
-} from "utils/use-optimistic-options";
-import { useDebounce } from "utils/index";
-
-export const useTasks = (param?: Partial<Task>) => {
+import { useQuery } from "react-query";
+import { Task, ChildTask } from "types/task";
+export const useTasks = () => {
   const client = useHttp();
-  const debouncedParam = { ...param, name: useDebounce(param?.name, 200) };
-
-  return useQuery<Task[]>(["tasks", debouncedParam], () =>
-    client("tasks", { data: debouncedParam })
+  return useQuery<Task[]>(["getTakeKindList", {}], () =>
+    client("getTakeKindList")
   );
 };
-
-export const useAddTask = (queryKey: QueryKey) => {
+export const useChildTasks = (id: string) => {
   const client = useHttp();
-
-  return useMutation(
-    (params: Partial<Task>) =>
-      client(`tasks`, {
-        data: params,
-        method: "POST",
-      }),
-    useAddConfig(queryKey)
-  );
-};
-
-export const useTask = (id?: number) => {
-  const client = useHttp();
-  return useQuery<Task>(["task", { id }], () => client(`tasks/${id}`), {
-    enabled: Boolean(id),
+  return useQuery<ChildTask[]>(["getTakeKindList", { id: id }], async () => {
+    const data = await client("getTakeKindList", { data: { id: id } });
+    const childTaskList: ChildTask[] =
+      data?.find((item: Task) => item.id === id)?.businessList || [];
+    return childTaskList;
   });
-};
-
-export const useEditTask = (queryKey: QueryKey) => {
-  const client = useHttp();
-  return useMutation(
-    (params: Partial<Task>) =>
-      client(`tasks/${params.id}`, {
-        method: "PATCH",
-        data: params,
-      }),
-    useEditConfig(queryKey)
-  );
-};
-
-export const useDeleteTask = (queryKey: QueryKey) => {
-  const client = useHttp();
-
-  return useMutation(
-    ({ id }: { id: number }) =>
-      client(`tasks/${id}`, {
-        method: "DELETE",
-      }),
-    useDeleteConfig(queryKey)
-  );
 };

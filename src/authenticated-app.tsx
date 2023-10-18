@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "@emotion/styled";
 import {
   ImgBox,
   LoginLogoBox,
@@ -8,6 +7,8 @@ import {
 } from "components/lib";
 import { Route, Routes } from "react-router";
 import { TasksScreen } from "screens/tasks";
+import { ChildTasksScreen } from "screens/child-task";
+import { StepScreen } from "screens/step";
 
 export default function AuthenticatedApp() {
   return (
@@ -24,16 +25,15 @@ export default function AuthenticatedApp() {
         }}
       >
         <Routes>
-          <Route path={"projects"} element={<TasksScreen />} />
-          <Route path={"projects/:projectId/*"} element={<TasksScreen />} />
+          <Route path={"tasks"} element={<TasksScreen />} />
+          <Route path={"tasks/:taskId/*"} element={<ChildTasksScreen />} />
+          <Route
+            path={"tasks/:taskId/step/:taskId/*"}
+            element={<StepScreen />}
+          />
           <Route index element={<TasksScreen />} />
         </Routes>
       </ShadowCard>
     </ScreenContainer>
   );
 }
-
-const Main = styled.main`
-  display: flex;
-  overflow: hidden;
-`;
