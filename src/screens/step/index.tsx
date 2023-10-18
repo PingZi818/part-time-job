@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useDocumentTitle } from "utils";
-import { useMatch, useNavigate } from "react-router-dom";
-import { Button, Image, Grid, AutoCenter, Input, Modal } from "antd-mobile";
+import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Image,
+  Grid,
+  AutoCenter,
+  Input,
+  Modal,
+  Dialog,
+} from "antd-mobile";
 import { CardContent, CardTitle, Title } from "components/lib";
 import styled from "@emotion/styled";
 import leftArrowSrc from "assets/left-arrow.png";
@@ -11,11 +19,10 @@ import "./step.css";
 import { NumberKeyBoardModal } from "./number-key-board-modal";
 import { useAuth } from "context/auth-context";
 import { useHttp } from "utils/http";
+import { useChildTaskInUrl } from "./util";
 export const StepScreen = () => {
   const { user } = useAuth();
   const client = useHttp();
-
-  const match = useMatch("tasks/:taskId/step/:businessId/*");
   const [takeType, setTakeType] = useState("1");
   const [stepData, setStepData] = useState([
     {
@@ -34,9 +41,63 @@ export const StepScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [IDNumber, setIDNumber] = useState("");
   const [stepKey, setStepKey] = useState(0);
+  const { data: currentChildTask } = useChildTaskInUrl();
+  // TO DO 被动从设备获取到身份证识别结果
+  const goBackPage = () => {
+    window.history.back();
+  };
+  const navigate = useNavigate();
 
+  // 下一步
+  const handleNextStep = () => {
+    if (stepKey >= stepData.length - 1) return;
+    if (stepKey === 0 && takeType !== "3") {
+      const idCardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      const isValid = idCardReg.test(IDNumber);
+      if (isValid) {
+        setStepKey(stepKey + 1);
+      } else {
+        Dialog.alert({
+          content: "请填写正确的身份证号码",
+          onConfirm: () => {},
+        });
+      }
+    } else {
+      setStepKey(stepKey + 1);
+    }
+  };
+  // 上一步
+  const handlePrevStep = () => {
+    if (stepKey === 0) {
+      if (takeType === "3") {
+        setStepData([
+          {
+            key: "idCard",
+            name: "读取身份证信息",
+          },
+          {
+            key: "phone",
+            name: "输入手机号码",
+          },
+          {
+            key: "complete",
+            name: "完成",
+          },
+        ]);
+        setPhoneNumber("");
+        setStepKey(0);
+      } else {
+        goBackPage();
+      }
+    } else if (stepKey > 0 && stepKey < stepData.length - 1) {
+      setPhoneNumber("");
+      setStepKey(stepKey - 1);
+    } else {
+      navigate("/");
+    }
+  };
+  // 临时取号
   const quickGetNo = () => {
-    setTakeType("3");
     setStepData([
       {
         key: "phone",
@@ -47,31 +108,44 @@ export const StepScreen = () => {
         name: "完成",
       },
     ]);
+    setTakeType("3");
   };
+  // 取号
   const onGetFinalNo = async () => {
-    const params = {
-      applyUserName: user?.userName || "",
-      businessId: match?.params.businessId || "",
-      communityId: "",
-      identityCardNum: IDNumber,
-      takeType: takeType,
-      phoneNumber: phoneNumber,
-      windowId: "",
-    };
-    console.log("data: ", params);
-    await client("getTakeNo", { data: params, method: "POST" }).then();
-    setStepKey(stepKey + 1);
-    // TO DO 调用设备的取号接口， 发起取号动作
+    const phoneReg = /^1[3456789]\d{9}$/;
+    const isValid = phoneReg.test(phoneNumber);
+    if (isValid) {
+      const params = {
+        applyUserName: user?.userName || "",
+        businessId: currentChildTask?.businessId,
+        communityId: currentChildTask?.communityId,
+        windowId: currentChildTask?.windowId,
+        takeType: takeType,
+        identityCardNum: IDNumber,
+        phoneNumber: phoneNumber,
+      };
+      console.log("data: ", params);
+      await client("getTakeNo", { data: params, method: "POST" });
+      setStepKey(stepKey + 1);
+      // TO DO 调用设备的取号接口， 发起取号动作
+    } else {
+      Dialog.alert({
+        content: "请填写正确的手机号码",
+        onConfirm: () => {},
+      });
+    }
   };
   useDocumentTitle("项目列表", false);
   return (
     <>
       <CardTitle>
-        <Title>xxxxxx村社区——保险服务</Title>
+        <Title>
+          {user?.empName}——{currentChildTask?.kindName}
+        </Title>
       </CardTitle>
       <CardContentBox className="step-box">
         <ContentHeader>
-          <TextBox>居民养老保险参保缴费</TextBox>
+          <TextBox>{currentChildTask?.businessName}</TextBox>
           <TextBox>已取号人数：10人</TextBox>
         </ContentHeader>
         <ContentMain>
@@ -108,8 +182,8 @@ export const StepScreen = () => {
           <BtnList
             stepKey={stepKey}
             stepData={stepData}
-            onNext={() => setStepKey(stepKey + 1)}
-            onPrev={() => setStepKey(stepKey - 1)}
+            onNext={handleNextStep}
+            onPrev={handlePrevStep}
             quickGetNo={quickGetNo}
             onGetFinalNo={onGetFinalNo}
           />
@@ -179,6 +253,7 @@ const IdCard = ({
           content={
             <NumberKeyBoardModal
               title="请输入身份证号码"
+              type="IDCard"
               keywordList={[
                 "1",
                 "2",
@@ -239,6 +314,7 @@ const PhoneInput = ({
           content={
             <NumberKeyBoardModal
               title="请输入手机号码"
+              type="phone"
               keywordList={[
                 "1",
                 "2",
@@ -277,23 +353,11 @@ const BtnList = ({
   quickGetNo: () => void;
   onGetFinalNo: () => void;
 }) => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
-  const match = useMatch("tasks/:taskId/step/:businessId/*");
-  const goBackPage = () => {
-    window.history.back();
-  };
   const goNextStep = () => {
-    stepKey < stepData.length - 1 && onNext();
+    onNext();
   };
   const goPreStep = () => {
-    if (stepKey === 0) {
-      goBackPage();
-    } else if (stepKey > 0 && stepKey < stepData.length - 1) {
-      onPrev();
-    } else {
-      navigate("/");
-    }
+    onPrev();
   };
   return (
     <>

@@ -6,13 +6,3 @@ export const useTaskIdInUrl = () => {
   return match?.params.taskId || "";
 };
 export const useTaskInUrl = () => useChildTasks(useTaskIdInUrl());
-
-export const useChildTasksSearchParams = () => {
-  const taskId = useTaskIdInUrl();
-  return useMemo(
-    () => ({
-      taskId,
-    }),
-    [taskId]
-  );
-};

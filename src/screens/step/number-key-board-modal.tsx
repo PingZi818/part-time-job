@@ -1,24 +1,40 @@
 import React, { useState } from "react";
-import { Button, Image, Grid, AutoCenter, Input } from "antd-mobile";
+import { Button, Image, Grid, AutoCenter, Input, Dialog } from "antd-mobile";
 import styled from "@emotion/styled";
 import leftArrowSrc from "assets/left-arrow.png";
 import deleteSrc from "assets/delete.png";
 import clearSrc from "assets/clear.png";
 export const NumberKeyBoardModal = ({
   title,
+  type,
   keywordList,
   onClose,
   onConfirm,
 }: {
   title: string;
+  type: string;
   keywordList: string[];
   onClose: () => void;
   onConfirm: (num: string) => void;
 }) => {
   const [numberStr, setNumberStr] = useState("");
   const handleOk = () => {
-    onConfirm(numberStr);
-    onClose();
+    if (type === "IDCard") {
+      const idCardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      const isValid = idCardReg.test(numberStr);
+      if (isValid) {
+        onConfirm(numberStr);
+        onClose();
+      } else {
+        Dialog.alert({
+          content: "请填写正确的身份证号码",
+          onConfirm: () => {},
+        });
+      }
+    } else {
+      onConfirm(numberStr);
+      onClose();
+    }
   };
   const handleClickButton = (num: string) => {
     if (num === "clear") {

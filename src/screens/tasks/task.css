@@ -1,11 +1,13 @@
 .task-item {
   width: 22vw;
   background: #61b4c6;
-  display: inline-block;
-  line-height: 10vh;
+  display: flex;
   font-size: 2.8rem;
   border-radius: 6px;
+  height: 10vh;
   color: #fff;
+  align-items: center;
+  justify-content: center;
 }
 .content {
   display: inline-block;

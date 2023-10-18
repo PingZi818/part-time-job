@@ -3,6 +3,7 @@ export interface ChildTask {
   businessName: string;
   communityId: string;
   windowId: string;
+  kindName?: string;
 }
 export interface DIOTakeNoSave {
   applyUserName: string;

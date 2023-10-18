@@ -20,9 +20,12 @@
   cursor: pointer;
   width: 35vw;
   background: #61b4c6;
-  display: inline-block;
-  line-height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
   font-size: 2.8rem;
+  padding: 2rem;
   border-radius: 6px;
   color: #fff;
 }
@@ -49,13 +52,14 @@
   --dot-border-radius: 8px;
   --dot-spacing: 10px;
 }
-.child-task .return-box {
-  position: absolute;
+.child-task-return-box {
+  text-align: left;
+  font-size: 2.8rem;
+  line-height: 4vh;
   width: 12vw;
   height: 6vh;
   background: #61b4c6;
-  left: 5vw;
-  /* top: 3.6vh; */
+  margin-left: 5vw;
   border: none;
   letter-spacing: 18px;
   top: 50%;
@@ -65,4 +69,7 @@
   text-align: left;
   font-size: 2.8rem;
   line-height: 4vh;
+}
+.child-task-title {
+  text-align: left;
 }

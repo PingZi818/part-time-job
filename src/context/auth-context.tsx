@@ -20,6 +20,7 @@ const bootstrapUser = async () => {
       userName: "1001",
       userType: "",
       userToken: "8c639b4bba823e1c3d358e8bd1effef2",
+      empName: "",
     };
   }
   return user;

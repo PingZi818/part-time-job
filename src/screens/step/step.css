@@ -65,6 +65,10 @@
   border: solid 1px #61b4c6;
   border-radius: 6px;
 }
+.step-box .adm-input-element {
+  padding-left: 30px;
+  font-size: 28px;
+}
 .complete-text {
   width: 100%;
   text-align: center;
