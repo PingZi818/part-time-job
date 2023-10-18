@@ -40,7 +40,6 @@ export default function UnauthenticatedApp() {
           <BgLeft></BgLeft>
           <LoginBox>
             <LoginBoxContent>
-              <ErrorBox error={error} />
               <LoginScreen onError={setError} />
             </LoginBoxContent>
           </LoginBox>

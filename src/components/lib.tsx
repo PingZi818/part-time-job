@@ -60,8 +60,7 @@ export const ErrorBox = ({ error }: { error: unknown }) => {
   if (isError(error)) {
     return (
       <ConfigProvider locale={zhCN}>
-        {/* <ErrorBlock status='disconnected' /> */}
-        {error}
+        <ErrorBlock status="disconnected" />
       </ConfigProvider>
     );
   }
