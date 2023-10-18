@@ -8,13 +8,33 @@ export const NumberKeyBoardModal = ({
   title,
   keywordList,
   onClose,
+  onConfirm,
 }: {
   title: string;
   keywordList: string[];
   onClose: () => void;
+  onConfirm: (num: string) => void;
 }) => {
   const [numberStr, setNumberStr] = useState("");
-  const handleOk = () => {};
+  const handleOk = () => {
+    onConfirm(numberStr);
+    onClose();
+  };
+  const handleClickButton = (num: string) => {
+    if (num === "clear") {
+      handleClear();
+    } else if (num === "X") {
+      handleDelete();
+    } else {
+      setNumberStr(numberStr + num);
+    }
+  };
+  const handleDelete = () => {
+    setNumberStr(numberStr.slice(0, numberStr.length - 1));
+  };
+  const handleClear = () => {
+    setNumberStr("");
+  };
   return (
     <ModalBox>
       <div className="modal-header">
@@ -71,7 +91,7 @@ export const NumberKeyBoardModal = ({
                   className="keyword-btn"
                   block
                   color="primary"
-                  onClick={() => setNumberStr(numberStr + num)}
+                  onClick={() => handleClickButton(num)}
                 >
                   {num === "clear" ? (
                     <Image src={clearSrc} height={"4vh"} fit="contain" />

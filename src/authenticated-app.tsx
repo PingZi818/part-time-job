@@ -28,7 +28,7 @@ export default function AuthenticatedApp() {
           <Route path={"tasks"} element={<TasksScreen />} />
           <Route path={"tasks/:taskId/*"} element={<ChildTasksScreen />} />
           <Route
-            path={"tasks/:taskId/step/:taskId/*"}
+            path={"tasks/:taskId/step/:businessId/*"}
             element={<StepScreen />}
           />
           <Route index element={<TasksScreen />} />

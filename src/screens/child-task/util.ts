@@ -1,6 +1,5 @@
-import { useUrlQueryParam } from "utils/url";
 import { useMemo } from "react";
-import { useLocation, useMatch } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 import { useChildTasks } from "utils/task";
 export const useTaskIdInUrl = () => {
   const match = useMatch("tasks/:taskId/*");

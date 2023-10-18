@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDocumentTitle } from "utils";
-import { useNavigate } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import { Button, Image, Grid, AutoCenter, Input, Modal } from "antd-mobile";
 import { CardContent, CardTitle, Title } from "components/lib";
 import styled from "@emotion/styled";
@@ -9,7 +9,14 @@ import rightArrowSrc from "assets/right-arrow.png";
 import stepArrowSrc from "assets/step-arrow.png";
 import "./step.css";
 import { NumberKeyBoardModal } from "./number-key-board-modal";
+import { useAuth } from "context/auth-context";
+import { useHttp } from "utils/http";
 export const StepScreen = () => {
+  const { user } = useAuth();
+  const client = useHttp();
+
+  const match = useMatch("tasks/:taskId/step/:businessId/*");
+  const [takeType, setTakeType] = useState("1");
   const [stepData, setStepData] = useState([
     {
       key: "idCard",
@@ -24,9 +31,12 @@ export const StepScreen = () => {
       name: "完成",
     },
   ]);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [IDNumber, setIDNumber] = useState("");
   const [stepKey, setStepKey] = useState(0);
 
   const quickGetNo = () => {
+    setTakeType("3");
     setStepData([
       {
         key: "phone",
@@ -37,6 +47,21 @@ export const StepScreen = () => {
         name: "完成",
       },
     ]);
+  };
+  const onGetFinalNo = async () => {
+    const params = {
+      applyUserName: user?.userName || "",
+      businessId: match?.params.businessId || "",
+      communityId: "",
+      identityCardNum: IDNumber,
+      takeType: takeType,
+      phoneNumber: phoneNumber,
+      windowId: "",
+    };
+    console.log("data: ", params);
+    await client("getTakeNo", { data: params, method: "POST" }).then();
+    setStepKey(stepKey + 1);
+    // TO DO 调用设备的取号接口， 发起取号动作
   };
   useDocumentTitle("项目列表", false);
   return (
@@ -53,9 +78,19 @@ export const StepScreen = () => {
           <StepProgress stepKey={stepKey} stepData={stepData} />
           <div className="main-content-bottom">
             {/* 输入身份证 */}
-            {stepData[stepKey].key === "idCard" && <IdCard />}
+            {stepData[stepKey].key === "idCard" && (
+              <IdCard
+                onGetIDNumber={setIDNumber}
+                onChangeTaskType={() => setTakeType("2")}
+              />
+            )}
             {/* 输入手机号 */}
-            {stepData[stepKey].key === "phone" && <PhoneInput />}
+            {stepData[stepKey].key === "phone" && (
+              <PhoneInput
+                phoneNumber={phoneNumber}
+                onGetPhoneNumber={setPhoneNumber}
+              />
+            )}
             {/* 完成 */}
             {stepData[stepKey].key === "complete" && (
               <AutoCenter className="complete-text">
@@ -76,6 +111,7 @@ export const StepScreen = () => {
             onNext={() => setStepKey(stepKey + 1)}
             onPrev={() => setStepKey(stepKey - 1)}
             quickGetNo={quickGetNo}
+            onGetFinalNo={onGetFinalNo}
           />
         </ContentFooter>
       </CardContentBox>
@@ -119,8 +155,18 @@ const StepProgress = ({
   );
 };
 
-const IdCard = () => {
+const IdCard = ({
+  onGetIDNumber,
+  onChangeTaskType,
+}: {
+  onGetIDNumber: (num: string) => void;
+  onChangeTaskType: () => void;
+}) => {
   const [visible, setVisible] = useState(false);
+  const inputManually = () => {
+    setVisible(true);
+    onChangeTaskType();
+  };
   return (
     <Grid columns={23} gap={8} className="step-item-list">
       <Grid.Item span={16} className="text-align-left font-size-46">
@@ -148,6 +194,7 @@ const IdCard = () => {
                 "x",
               ]}
               onClose={() => setVisible(false)}
+              onConfirm={(num) => onGetIDNumber(num)}
             />
           }
         />
@@ -156,7 +203,7 @@ const IdCard = () => {
           block
           shape="rounded"
           color="primary"
-          onClick={() => setVisible(true)}
+          onClick={inputManually}
         >
           <div className="font-size-28">手动输入</div>
         </Button>
@@ -164,7 +211,13 @@ const IdCard = () => {
     </Grid>
   );
 };
-const PhoneInput = () => {
+const PhoneInput = ({
+  phoneNumber,
+  onGetPhoneNumber,
+}: {
+  phoneNumber: string;
+  onGetPhoneNumber: (num: string) => void;
+}) => {
   const [visible, setVisible] = useState(false);
   return (
     <Grid columns={23} gap={8} className="step-item-list">
@@ -175,6 +228,7 @@ const PhoneInput = () => {
         <div className="phone-input">
           <Input
             placeholder=""
+            value={phoneNumber}
             onFocus={() => setVisible(true)}
             clearable
           ></Input>
@@ -200,6 +254,7 @@ const PhoneInput = () => {
                 "clear",
               ]}
               onClose={() => setVisible(false)}
+              onConfirm={(num) => onGetPhoneNumber(num)}
             />
           }
         />
@@ -213,14 +268,18 @@ const BtnList = ({
   onNext,
   onPrev,
   quickGetNo,
+  onGetFinalNo,
 }: {
   stepKey: number;
   stepData: { key: string; name: string }[];
   onNext: () => void;
   onPrev: () => void;
   quickGetNo: () => void;
+  onGetFinalNo: () => void;
 }) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const match = useMatch("tasks/:taskId/step/:businessId/*");
   const goBackPage = () => {
     window.history.back();
   };
@@ -303,7 +362,7 @@ const BtnList = ({
           block
           shape="rounded"
           color="primary"
-          onClick={goNextStep}
+          onClick={onGetFinalNo}
         >
           <div className="font-size-28">去取号</div>
         </Button>
