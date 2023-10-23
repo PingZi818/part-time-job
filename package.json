@@ -1,7 +1,7 @@
 {
-  "name": "jira",
+  "name": "task",
   "version": "0.1.0",
-  "private": true,
+  "homepage" : ".",
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@emotion/core": "^11.0.0",

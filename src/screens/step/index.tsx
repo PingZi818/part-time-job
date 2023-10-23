@@ -43,6 +43,16 @@ export const StepScreen = () => {
   const [stepKey, setStepKey] = useState(0);
   const { data: currentChildTask } = useChildTaskInUrl();
   // TO DO 被动从设备获取到身份证识别结果
+  //   3、调用取号机设备硬件接口
+  // //获取设备ID
+  // if (window.androidJSBridge) {
+  // 	androidJSBridge.getUid();
+  // }
+
+  // //获取身份证信息
+  // if (window.androidJSBridge) {
+  // 	androidJSBridge.getUserCardId();
+  // }
   const goBackPage = () => {
     window.history.back();
   };

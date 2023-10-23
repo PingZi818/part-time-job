@@ -15,13 +15,7 @@ const bootstrapUser = async () => {
   let user = null;
   const token = auth.getToken();
   if (token) {
-    user = {
-      userId: "1001",
-      userName: "1001",
-      userType: "",
-      userToken: "8c639b4bba823e1c3d358e8bd1effef2",
-      empName: "",
-    };
+    user = auth.getUser();
   }
   return user;
 };
@@ -47,7 +41,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setData: setUser,
   } = useAsync<User | null>();
   const queryClient = useQueryClient();
-
   // point free
   const login = (form: AuthForm) => auth.login(form).then(setUser);
   const logout = () =>

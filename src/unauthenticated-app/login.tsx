@@ -2,7 +2,7 @@
 import { jsx, css } from "@emotion/react";
 import React, { useState } from "react";
 import { useAuth } from "context/auth-context";
-import { Button, Form, Input } from "antd-mobile";
+import { Button, Dialog, Form, Input } from "antd-mobile";
 import userImg from "assets/user.png";
 import lockImg from "assets/lock.png";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
@@ -33,7 +33,10 @@ export const LoginScreen = ({
     try {
       await run(login(values));
     } catch (e: any) {
-      onError(e);
+      Dialog.alert({
+        content: e.message,
+        onConfirm: () => {},
+      });
     }
   };
 
@@ -43,19 +46,19 @@ export const LoginScreen = ({
         <Form layout="horizontal" onFinish={handleSubmit}>
           <Form.Item
             label={<img className="user-icon" alt="user" src={userImg} />}
-            name={"username"}
+            name={"userName"}
           >
             <Input
               placeholder={"请输入用户名"}
               type="text"
-              id={"username"}
+              id={"userName"}
               maxLength={20}
               clearable
             />
           </Form.Item>
           <Form.Item
             label={<img className="user-password" alt="lock" src={lockImg} />}
-            name={"password"}
+            name={"userPassword"}
             extra={
               <div css={eye}>
                 {!visible ? (
@@ -69,7 +72,7 @@ export const LoginScreen = ({
             <Input
               placeholder={"请输入密码"}
               type={visible ? "text" : "password"}
-              id={"password"}
+              id={"userPassword"}
               maxLength={20}
               clearable
             />
