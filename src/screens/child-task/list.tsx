@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
 import { ChildTask } from "types/task";
-import { AutoCenter, Image, Grid, Swiper } from "antd-mobile";
+import { AutoCenter, Image, Grid, Swiper, SpinLoading } from "antd-mobile";
 import { SwiperRef } from "antd-mobile/es/components/swiper";
 import leftArrowSrc from "assets/left-arrow.png";
 import rightArrowSrc from "assets/right-arrow.png";
 import { Link } from "react-router-dom";
 interface ListProps {
   tasks: ChildTask[];
+  loading: boolean;
 }
 function getNewArr(arr: ChildTask[], n: number) {
   let newArr = [];
@@ -16,7 +17,7 @@ function getNewArr(arr: ChildTask[], n: number) {
   return newArr;
 }
 
-export const List = ({ tasks }: ListProps) => {
+export const List = ({ tasks, loading }: ListProps) => {
   const NewList = getNewArr(tasks, 6);
   const ref = useRef<SwiperRef>(null);
   const [currentSwiperIndex, setCurrentSwiperIndex] = useState(0);
@@ -46,14 +47,26 @@ export const List = ({ tasks }: ListProps) => {
   ));
   const listItems = (
     <div>
-      <Swiper
-        allowTouchMove={true}
-        ref={ref}
-        loop
-        onIndexChange={(index) => onIndexChange(index)}
-      >
-        {items}
-      </Swiper>
+      {items.length > 1 ? (
+        <Swiper
+          allowTouchMove={true}
+          ref={ref}
+          loop
+          onIndexChange={(index) => onIndexChange(index)}
+        >
+          {items}
+        </Swiper>
+      ) : (
+        <Swiper
+          allowTouchMove={true}
+          ref={ref}
+          loop
+          indicator={() => null}
+          onIndexChange={(index) => onIndexChange(index)}
+        >
+          {items}
+        </Swiper>
+      )}
       {currentSwiperIndex > 0 && (
         <div
           className="arrow-left"
@@ -76,5 +89,5 @@ export const List = ({ tasks }: ListProps) => {
       )}
     </div>
   );
-  return <>{listItems}</>;
+  return <>{loading ? <SpinLoading /> : listItems}</>;
 };

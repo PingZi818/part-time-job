@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import * as auth from "auth-provider";
 import { useAuth } from "context/auth-context";
 import { ErrorBoundary } from "components/error-boundary";
 import { FullPageErrorFallback, FullPageLoading } from "components/lib";

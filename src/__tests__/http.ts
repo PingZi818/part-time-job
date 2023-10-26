@@ -31,7 +31,7 @@ test("http方法发送异步请求", async () => {
 });
 
 test("http请求时会在header里带上token", async () => {
-  const token = "FAKE_TOKEN";
+  const userToken = "FAKE_TOKEN";
   const endpoint = "test-endpoint";
   const mockResult = { mockValue: "mock" };
 
@@ -44,6 +44,6 @@ test("http请求时会在header里带上token", async () => {
     })
   );
 
-  await http(endpoint, { token });
-  expect(request.headers.get("Authorization")).toBe(`Bearer ${token}`);
+  await http(endpoint, { userToken });
+  expect(request.headers.get("userToken")).toBe(`${userToken}`);
 });

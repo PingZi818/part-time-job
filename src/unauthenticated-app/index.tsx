@@ -4,16 +4,8 @@ import { Button } from "antd-mobile";
 import styled from "@emotion/styled";
 import leftBg from "assets/left-bg.png";
 import { useDocumentTitle } from "utils";
-import {
-  CardContent,
-  CardTitle,
-  ErrorBox,
-  ImgBox,
-  LoginLogoBox,
-  ScreenContainer,
-  ShadowCard,
-  Title,
-} from "components/lib";
+import { CardContent, CardTitle, Title } from "components/lib";
+import LayoutBox from "components/layout";
 
 export default function UnauthenticatedApp() {
   const [error, setError] = useState<Error | null>(null);
@@ -21,31 +13,23 @@ export default function UnauthenticatedApp() {
   useDocumentTitle("请登录以继续");
 
   return (
-    <ScreenContainer>
-      <LoginLogoBox>
-        <ImgBox />
-      </LoginLogoBox>
-      <ShadowCard
-        bodyStyle={{
-          padding: 0,
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-        }}
-      >
-        <CardTitle>
-          <Title>xxxxxx村社区取号系统</Title>
-        </CardTitle>
-        <CardContentBox>
-          <BgLeft></BgLeft>
-          <LoginBox>
-            <LoginBoxContent>
-              <LoginScreen onError={setError} />
-            </LoginBoxContent>
-          </LoginBox>
-        </CardContentBox>
-      </ShadowCard>
-    </ScreenContainer>
+    <LayoutBox
+      content={
+        <div>
+          <CardTitle>
+            <Title>xxxxxx村社区取号系统</Title>
+          </CardTitle>
+          <CardContentBox>
+            <BgLeft></BgLeft>
+            <LoginBox>
+              <LoginBoxContent>
+                <LoginScreen onError={setError} />
+              </LoginBoxContent>
+            </LoginBox>
+          </CardContentBox>
+        </div>
+      }
+    ></LayoutBox>
   );
 }
 

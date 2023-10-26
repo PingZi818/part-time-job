@@ -1,6 +1,14 @@
 import React, { useRef, useState } from "react";
 import { Task } from "types/task";
-import { AutoCenter, Image, Grid, Space, Swiper, Toast } from "antd-mobile";
+import {
+  AutoCenter,
+  Image,
+  Grid,
+  Space,
+  Swiper,
+  Toast,
+  SpinLoading,
+} from "antd-mobile";
 import { SwiperRef } from "antd-mobile/es/components/swiper";
 import { Link } from "react-router-dom";
 import leftArrowSrc from "assets/left-arrow.png";
@@ -44,14 +52,26 @@ export const List = ({ tasks, loading }: ListProps) => {
   ));
   const listItems = (
     <div>
-      <Swiper
-        allowTouchMove={true}
-        ref={ref}
-        loop
-        onIndexChange={(index) => onIndexChange(index)}
-      >
-        {items}
-      </Swiper>
+      {items.length > 1 ? (
+        <Swiper
+          allowTouchMove={true}
+          ref={ref}
+          loop
+          onIndexChange={(index) => onIndexChange(index)}
+        >
+          {items}
+        </Swiper>
+      ) : (
+        <Swiper
+          allowTouchMove={true}
+          ref={ref}
+          loop
+          indicator={() => null}
+          onIndexChange={(index) => onIndexChange(index)}
+        >
+          {items}
+        </Swiper>
+      )}
       {currentSwiperIndex > 0 && (
         <div
           className="arrow-left"
@@ -74,5 +94,5 @@ export const List = ({ tasks, loading }: ListProps) => {
       )}
     </div>
   );
-  return <>{listItems}</>;
+  return <>{loading ? <SpinLoading /> : listItems}</>;
 };

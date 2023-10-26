@@ -1,16 +1,77 @@
-.step-box .return-box {
-  width: 12vw;
+.left-btn-box,
+.middle-btn-box,
+.right-btn-box {
+  display: flex;
+  height: 100%;
+}
+.left-btn-box .adm-button-block,
+.middle-btn-box .adm-button-block {
+  width: fit-content;
+}
+.btn-with-icon {
+  display: flex;
+  justify-content: center;
+}
+.btn-with-icon .btn-text {
+  margin-left: 10px;
+}
+.step-box-return-box {
+  text-align: center;
+  font-size: 2.8rem;
+  line-height: 4vh;
+  width: 8vw;
   height: 6vh;
   background: #57626b;
   border: none;
-  letter-spacing: 18px;
+  top: 50%;
+  padding: 0 20px;
+  transform: translateY(-50%);
+}
+.step-box-home-btn {
+  text-align: center;
+  font-size: 2.8rem;
+  line-height: 4vh;
+  padding: 0 20px;
+  width: 8vw;
+  height: 6vh;
+  margin-left: 1vw;
+  border: none;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #649c9d;
+}
+.step-box-temporary-btn {
+  text-align: center;
+  padding: 0 20px;
+  font-size: 2.8rem;
+  line-height: 4vh;
+  margin: 0 1vw;
+  padding: 0 30px;
+  height: 6vh;
+  border: none;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #61b4c6;
+}
+.step-box-next-box {
+  padding: 0 20px;
+  text-align: center;
+  font-size: 2.8rem;
+  line-height: 4vh;
+  padding: 0 30px;
+  width: 10vw;
+  height: 6vh;
+  border: none;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #57626b;
+  border: none;
 }
 .main-content-bottom {
   width: 100%;
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: left;
+  justify-content: center;
 }
 .main-content-bottom .step-item-list {
   padding: 2vh;
@@ -18,16 +79,34 @@
 .step-item-list {
   width: 100%;
   padding-top: 5vh;
+  padding: 2vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.step-item-list .active-step-item {
+.step-item-list .active-step-item .step-name-item {
   background: #61b4c6;
+  color: #fff;
+  box-shadow: 10px 10px 10px 0 rgba(84, 171, 191, 0.5);
 }
-.step-box .next-box {
-  width: 12vw;
-  height: 6vh;
-  background: #57626b;
-  border: none;
+.step-item-list .active-step-item .circle-item {
+  background: #61b4c6;
+  color: #fff;
+  box-shadow: 4px 4px 10px 0 rgba(84, 171, 191, 1),
+    6px 6px 10px 0 rgba(255, 255, 255, 1);
 }
+.step-item-list .pass-step-item .step-name-item {
+  background: #75c4cb;
+  color: #12242b;
+  box-shadow: 10px 10px 10px 0 rgba(82, 169, 194, 1);
+}
+.step-item-list .pass-step-item .circle-item {
+  background: #75c4cb;
+  color: #12242b;
+  box-shadow: 4px 4px 10px 0 rgba(84, 171, 191, 1),
+    6px 6px 10px 0 rgba(255, 255, 255, 1);
+}
+
 .get-number-btn {
   width: 12vw;
   height: 6vh;
@@ -59,7 +138,7 @@
   text-align: left;
 }
 .step-box .phone-input,
-.step-box .phone-input .adm-input,
+.step-box .adm-input,
 .step-box .adm-input-element {
   height: 100%;
   border: solid 1px #61b4c6;
@@ -73,29 +152,47 @@
   width: 100%;
   text-align: center;
   font-size: 4.8rem;
+  height: 100%;
   font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .number-key-board-content {
   outline: solid 4px #61b4c6;
 }
-.adm-grid-item .keyword-btn {
-  padding: 1vw;
-  background: #61b4c6;
-  color: #fff;
-  font-size: 36px;
-  border-radius: 8px;
-  border: none;
+.adm-modal-body {
+  max-height: 80vh;
 }
-.modal-header {
-  position: relative;
+.text-align-center {
+  text-align: center;
 }
-.modal-header .return-box {
-  width: 12vw;
-  height: 6vh;
-  background: #57626b;
-  border: none;
-  margin-bottom: 2vw;
+.step-item-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.modal-number-list {
-  margin-top: 20px;
+.id-card-img {
+  margin-top: 2vh;
+}
+.step-item-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.step-item-info .id-card-info,
+.step-item-info .phone-info {
+  display: flex;
+  font-size: 30px;
+  justify-content: center;
+}
+.step-item-info .action-box {
+  font-size: 20px;
+}
+.step-item-info .link-btn {
+  font-size: 28px;
+  color: rgb(80, 167, 194);
+  cursor: pointer;
 }

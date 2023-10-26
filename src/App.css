@@ -11,3 +11,15 @@ html {
 html body #root .App {
   min-height: 100vh;
 }
+.adm-dialog-body {
+  border: solid 2px #61b4c6;
+  border-radius: 6px;
+}
+.dialog-content-box {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 30px;
+  font-size: 2rem;
+  text-align: center;
+  align-items: center;
+}

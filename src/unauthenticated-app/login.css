@@ -13,8 +13,8 @@
 }
 .adm-input-element {
   font-size: 3rem;
-  font-weight: 200;
-  color: #b2b2b2;
+  font-weight: normal;
+  color: #333;
 }
 .adm-list-item-content-main {
   padding: 1vw;

@@ -1,29 +1,14 @@
 import React from "react";
-import {
-  ImgBox,
-  LoginLogoBox,
-  ShadowCard,
-  ScreenContainer,
-} from "components/lib";
 import { Route, Routes } from "react-router";
 import { TasksScreen } from "screens/tasks";
 import { ChildTasksScreen } from "screens/child-task";
 import { StepScreen } from "screens/step";
+import LayoutBox from "components/layout";
 
 export default function AuthenticatedApp() {
   return (
-    <ScreenContainer>
-      <LoginLogoBox>
-        <ImgBox />
-      </LoginLogoBox>
-      <ShadowCard
-        bodyStyle={{
-          padding: 0,
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-        }}
-      >
+    <LayoutBox
+      content={
         <Routes>
           <Route path={"tasks"} element={<TasksScreen />} />
           <Route path={"tasks/:taskId/*"} element={<ChildTasksScreen />} />
@@ -33,7 +18,7 @@ export default function AuthenticatedApp() {
           />
           <Route index element={<TasksScreen />} />
         </Routes>
-      </ShadowCard>
-    </ScreenContainer>
+      }
+    ></LayoutBox>
   );
 }

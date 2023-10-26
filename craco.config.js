@@ -13,6 +13,7 @@ module.exports = {
         },
       },
     },
+    historyApiFallback: true,
   },
   plugins: [
     {

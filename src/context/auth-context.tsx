@@ -12,11 +12,7 @@ interface AuthForm {
 }
 
 const bootstrapUser = async () => {
-  let user = null;
-  const token = auth.getToken();
-  if (token) {
-    user = auth.getUser();
-  }
+  const user = await auth.getUser();
   return user;
 };
 

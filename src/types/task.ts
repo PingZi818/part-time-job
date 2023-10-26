@@ -30,3 +30,9 @@ export interface Task {
   kindName: string;
   businessList: ChildTask[];
 }
+export interface MachineStatus {
+  printerBalance: number;
+  printerWarning: boolean;
+  takeNum: number;
+  warningMessage: string;
+}

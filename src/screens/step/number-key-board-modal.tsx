@@ -1,48 +1,86 @@
-import React, { useState } from "react";
-import { Button, Image, Grid, AutoCenter, Input, Dialog } from "antd-mobile";
+import React, { useCallback, useState } from "react";
+import "./number-key-board-modal.css";
+import { Button, Image, Grid, Input, Dialog } from "antd-mobile";
 import styled from "@emotion/styled";
-import leftArrowSrc from "assets/left-arrow.png";
 import deleteSrc from "assets/delete.png";
 import clearSrc from "assets/clear.png";
+import { typeName } from "types";
+import DialogShow from "components/dialog-show";
+import { useMount } from "utils";
+import { validateIdCard, validatePhone } from "./util";
 export const NumberKeyBoardModal = ({
   title,
   type,
+  value,
   keywordList,
   onClose,
   onConfirm,
+  onResetTime,
 }: {
   title: string;
-  type: string;
+  type: typeName;
+  value: string;
   keywordList: string[];
   onClose: () => void;
   onConfirm: (num: string) => void;
+  onResetTime: () => void;
 }) => {
-  const [numberStr, setNumberStr] = useState("");
+  const [numberStr, setNumberStr] = useState(value);
+  useMount(
+    useCallback(() => {
+      setNumberStr(value);
+    }, [value])
+  );
+  const handleClose = () => {
+    onResetTime();
+    setNumberStr(value);
+    onClose();
+  };
   const handleOk = () => {
-    if (type === "IDCard") {
-      const idCardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-      const isValid = idCardReg.test(numberStr);
-      if (isValid) {
+    onResetTime();
+    if (type === typeName.IDCard) {
+      if (validateIdCard(numberStr)) {
         onConfirm(numberStr);
-        onClose();
+        handleClose();
       } else {
-        Dialog.alert({
-          content: "请填写正确的身份证号码",
-          onConfirm: () => {},
+        const handler = Dialog.show({
+          content: (
+            <DialogShow
+              content="请填写正确的身份证号码"
+              close={() => handler.close()}
+            />
+          ),
         });
       }
     } else {
-      onConfirm(numberStr);
-      onClose();
+      if (validatePhone(numberStr)) {
+        onConfirm(numberStr);
+        handleClose();
+      } else {
+        const handler = Dialog.show({
+          content: (
+            <DialogShow
+              content="请填写正确的手机号码"
+              close={() => handler.close()}
+            />
+          ),
+        });
+      }
     }
   };
   const handleClickButton = (num: string) => {
+    onResetTime();
     if (num === "clear") {
       handleClear();
-    } else if (num === "X") {
+    } else if (num === "delete") {
       handleDelete();
     } else {
-      setNumberStr(numberStr + num);
+      if (type === typeName.IDCard && numberStr.length < 18) {
+        setNumberStr(numberStr + num);
+      }
+      if (type === typeName.Phone && numberStr.length < 11) {
+        setNumberStr(numberStr + num);
+      }
     }
   };
   const handleDelete = () => {
@@ -52,89 +90,86 @@ export const NumberKeyBoardModal = ({
     setNumberStr("");
   };
   return (
-    <ModalBox>
+    <ModalBox className="number-key-board-modal">
       <div className="modal-header">
-        <Button
-          className="return-box"
-          block
-          shape="rounded"
-          color="primary"
-          onClick={onClose}
-        >
-          <Grid columns={4} gap={6}>
-            <Grid.Item>
-              <AutoCenter>
-                <Image
-                  src={leftArrowSrc}
-                  width={"4vw"}
-                  height={"4vh"}
-                  fit="contain"
-                />
-              </AutoCenter>
-            </Grid.Item>
-            <Grid.Item span={3}>
-              <div className="font-size-28">返回</div>
-            </Grid.Item>
-          </Grid>
-        </Button>
         <ModalTitle>{title}</ModalTitle>
       </div>
-      <div className="modal-input">
-        <Grid columns={4} gap={20}>
-          <Grid.Item span={3}>
-            <div className="phone-input">
-              <Input clearable value={numberStr}></Input>
-            </div>
-          </Grid.Item>
-          <Grid.Item>
-            <Button
-              className="keyword-btn"
-              block
-              color="primary"
-              onClick={() => handleOk()}
-            >
-              确认
-            </Button>
-          </Grid.Item>
-        </Grid>
-      </div>
-      <div className="modal-number-list">
-        <Grid columns={4} gap={20}>
-          {keywordList?.map((num, i) => {
-            return (
-              <Grid.Item key={i}>
+      <div className="modal-body">
+        <div className="modal-input">
+          <Grid columns={4} gap={20}>
+            <Grid.Item span={4}>
+              <div className="input-box">
+                <Input
+                  clearable
+                  value={numberStr}
+                  readOnly
+                  max={type === typeName.IDCard ? 18 : 11}
+                ></Input>
+              </div>
+            </Grid.Item>
+          </Grid>
+        </div>
+        <div className="modal-number-list">
+          <Grid columns={4} gap={20}>
+            <Grid.Item span={3}>
+              <Grid columns={3} gap={20}>
+                {keywordList?.map((num, i) => {
+                  return (
+                    <Grid.Item
+                      key={i}
+                      span={type === typeName.Phone && num === "0" ? 2 : 1}
+                    >
+                      <Button
+                        className="keyword-btn"
+                        block
+                        color="primary"
+                        onClick={() => handleClickButton(num)}
+                      >
+                        {num === "clear" ? (
+                          <Image src={clearSrc} height={"4vh"} fit="contain" />
+                        ) : num === "delete" ? (
+                          <Image src={deleteSrc} height={"4vh"} fit="contain" />
+                        ) : (
+                          num
+                        )}
+                      </Button>
+                    </Grid.Item>
+                  );
+                })}
+              </Grid>
+            </Grid.Item>
+            <Grid.Item>
+              <div className="btn-right-box">
                 <Button
-                  className="keyword-btn"
+                  className="confirm-btn"
                   block
                   color="primary"
-                  onClick={() => handleClickButton(num)}
+                  onClick={() => handleOk()}
                 >
-                  {num === "clear" ? (
-                    <Image src={clearSrc} height={"4vh"} fit="contain" />
-                  ) : num === "X" ? (
-                    <Image src={deleteSrc} height={"4vh"} fit="contain" />
-                  ) : (
-                    num
-                  )}
+                  确认
                 </Button>
-              </Grid.Item>
-            );
-          })}
-        </Grid>
+                <Button
+                  className="close-box"
+                  block
+                  color="primary"
+                  onClick={handleClose}
+                >
+                  <div className="font-size-28">返回</div>
+                </Button>
+              </div>
+            </Grid.Item>
+          </Grid>
+        </div>
       </div>
     </ModalBox>
   );
 };
 const ModalBox = styled.div`
-  width: 60vw;
-  height: 30vw;
-  padding: 1vw 3vw 2vw;
+  width: 50vw;
+  padding: 0vw 3vw 1vw;
 `;
 const ModalTitle = styled.div`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  text-align: center;
   color: black;
   line-height: 6vh;
   font-size: 36px;

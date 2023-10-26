@@ -2,6 +2,7 @@ import qs from "qs";
 import * as auth from "auth-provider";
 import { useAuth } from "context/auth-context";
 import { useCallback } from "react";
+import { getMac } from "./androidJSBridge";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 interface Config extends RequestInit {
@@ -12,9 +13,16 @@ export const http = async (
   endpoint: string,
   { data, userToken, headers, ...customConfig }: Config = {}
 ) => {
+  const res = getMac();
+  const dataRes = {
+    ...data,
+    machineMac: res?.status
+      ? res?.data?.mac || "FF:00:00:00:00:FF"
+      : "FF:00:00:00:00:FF",
+  };
   // @ts-ignore
   const newHeaders = new Headers({
-    "Content-Type": data ? "application/json" : "",
+    "Content-Type": dataRes ? "application/json;charset=utf-8" : "",
     userToken: userToken,
   });
   const config = {
@@ -24,9 +32,9 @@ export const http = async (
   };
 
   if (config.method.toUpperCase() === "GET") {
-    endpoint += `?${qs.stringify(data)}`;
+    endpoint += `?${qs.stringify(dataRes)}`;
   } else {
-    config.body = JSON.stringify(data || {});
+    config.body = JSON.stringify(dataRes || {});
   }
   // axios 和 fetch 的表现不一样，axios可以直接在返回状态不为2xx的时候抛出异常
   return window
@@ -41,7 +49,7 @@ export const http = async (
       if (response.ok && res.code === 200) {
         return res.data;
       } else {
-        return Promise.reject({ message: res });
+        return Promise.reject(res);
       }
     });
 };

@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { Spin } from "antd";
 import zhCN from "antd-mobile/es/locales/zh-CN";
 import {
   Button,
@@ -8,9 +7,9 @@ import {
   AutoCenter,
   ErrorBlock,
   ConfigProvider,
+  SpinLoading,
 } from "antd-mobile";
 import loginLogo from "assets/login-logo.png";
-import loginBg from "assets/login-bg.png";
 import loginContentBg from "assets/login-content.png";
 export const Row = styled.div<{
   gap?: number | boolean;
@@ -43,7 +42,7 @@ const FullPage = styled.div`
 
 export const FullPageLoading = () => (
   <FullPage>
-    <Spin size={"large"} />
+    <SpinLoading />
   </FullPage>
 );
 
@@ -60,7 +59,8 @@ export const ErrorBox = ({ error }: { error: unknown }) => {
   if (isError(error)) {
     return (
       <ConfigProvider locale={zhCN}>
-        <ErrorBlock status="disconnected" />
+        {/* <ErrorBlock status='disconnected' /> */}
+        {error}
       </ConfigProvider>
     );
   }
@@ -71,22 +71,25 @@ export const ButtonNoPadding = styled(Button)`
   padding: 0;
 `;
 
-export const ScreenContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: url(${loginBg}) no-repeat center;
-  background-size: cover;
-  width: 100%;
-  padding-top: 2rem;
-`;
 export const Title = styled(AutoCenter)`
   padding: 1.5rem 0;
   color: rgb(255, 255, 255);
-  font-size: 60px;
+  font-size: 48px;
+  font-weight: bold;
+`;
+export const LogoTitle = styled(AutoCenter)`
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
 `;
 export const CardTitle = styled.div`
+  height: 12vh;
+  padding: 0 4rem;
   position: relative;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 `;
 export const CardContent = styled.div`
@@ -97,15 +100,17 @@ export const CardContent = styled.div`
   height: 100%;
 `;
 export const LoginLogoBox = styled.div`
+  display: flex;
+  align-items: end;
   width: 100%;
-  text-align: right;
+  text-align: left;
 `;
 
 export const ImgBox = styled.div`
   width: 45.4rem;
   display: inline-block;
   height: 7vh;
-  margin-right: 4.1rem;
+  margin-right: 1rem;
   background: url(${loginLogo}) no-repeat center;
   background-size: contain;
 `;

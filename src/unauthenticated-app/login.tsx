@@ -9,6 +9,7 @@ import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import { useAsync } from "utils/use-async";
 import "./login.css";
 import styled from "@emotion/styled";
+import DialogShow from "components/dialog-show";
 const eye = css`
   padding: 4px;
   cursor: pointer;
@@ -33,9 +34,10 @@ export const LoginScreen = ({
     try {
       await run(login(values));
     } catch (e: any) {
-      Dialog.alert({
-        content: e.message,
-        onConfirm: () => {},
+      const handler = Dialog.show({
+        content: (
+          <DialogShow content={e.message} close={() => handler.close()} />
+        ),
       });
     }
   };
@@ -62,9 +64,15 @@ export const LoginScreen = ({
             extra={
               <div css={eye}>
                 {!visible ? (
-                  <EyeInvisibleOutline onClick={() => setVisible(true)} />
+                  <EyeInvisibleOutline
+                    style={{ fontSize: "30px" }}
+                    onClick={() => setVisible(true)}
+                  />
                 ) : (
-                  <EyeOutline onClick={() => setVisible(false)} />
+                  <EyeOutline
+                    style={{ fontSize: "30px" }}
+                    onClick={() => setVisible(false)}
+                  />
                 )}
               </div>
             }

@@ -1,0 +1,57 @@
+.number-key-board-modal .modal-header {
+  position: relative;
+}
+.number-key-board-modal .modal-body {
+  margin-top: 2vh;
+}
+.number-key-board-modal .modal-body .modal-input .input-box {
+  height: 68px;
+  border: solid 1px #61b4c6;
+  border-radius: 6px;
+}
+.number-key-board-modal .modal-body .modal-input .input-box .adm-input-element {
+  font-weight: bold;
+  color: #333;
+  padding-left: 30px;
+  font-size: 36px;
+  letter-spacing: 10px;
+}
+.number-key-board-modal .modal-number-list .keyword-btn {
+  height: 100%;
+  padding: 1vw;
+  background: #61b4c6;
+  color: #fff;
+  font-size: 36px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+}
+.number-key-board-modal .modal-body .modal-number-list {
+  margin-top: 4vh;
+}
+.number-key-board-modal .btn-right-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.number-key-board-modal .confirm-btn {
+  flex: 1;
+  padding: 1vw;
+  background: #61b4c6;
+  color: #fff;
+  font-size: 36px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+}
+.number-key-board-modal .close-box {
+  height: calc(25% - 16px);
+  padding: 1vw;
+  background: #57626b;
+  color: #fff;
+  font-size: 36px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 20px;
+  font-weight: bold;
+}

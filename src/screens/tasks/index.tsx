@@ -1,19 +1,21 @@
 import React from "react";
 import { useDocumentTitle } from "utils";
-import { useTasks } from "utils/task";
+import { useMachineStatus, useTasks } from "utils/task";
 import { CardContent, CardTitle, Title } from "components/lib";
 import { List } from "screens/tasks/list";
 import "./task.css";
 import styled from "@emotion/styled";
-import { useAuth } from "context/auth-context";
 export const TasksScreen = () => {
   useDocumentTitle("事项分类", false);
   const { isLoading, data: list } = useTasks();
-  const { user } = useAuth();
+  const { data: currentMachineStatus } = useMachineStatus();
   return (
     <>
       <CardTitle>
-        <Title>{user?.empName}取号系统</Title>
+        <Title>村社区取号系统</Title>
+        <div className="total-paper-num">
+          剩余纸张数：{currentMachineStatus?.printerBalance}
+        </div>
       </CardTitle>
       <CardContentBox>
         <List loading={isLoading} tasks={list || []} />

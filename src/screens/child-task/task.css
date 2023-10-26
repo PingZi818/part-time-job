@@ -1,20 +1,23 @@
+.child-task {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
 .arrow-left {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  left: 0;
+  left: 6vw;
   transform: translateY(-50%);
   z-index: 1;
   cursor: pointer;
-  margin-left: 3vw;
 }
 .arrow-right {
-  position: absolute;
-  right: 0;
+  position: fixed;
+  right: 6vw;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
   cursor: pointer;
-  margin-right: 3vw;
 }
 .task-content .task-item {
   cursor: pointer;
@@ -24,7 +27,7 @@
   align-items: center;
   justify-content: center;
   height: 10vh;
-  font-size: 2.8rem;
+  font-size: 3rem;
   padding: 2rem;
   border-radius: 6px;
   color: #fff;
@@ -56,14 +59,25 @@
   text-align: left;
   font-size: 2.8rem;
   line-height: 4vh;
-  width: 12vw;
+  width: 8vw;
   height: 6vh;
-  background: #61b4c6;
-  margin-left: 5vw;
+  background: #57626b;
+  margin-left: 2vw;
   border: none;
-  letter-spacing: 18px;
   top: 50%;
   transform: translateY(-50%);
+}
+.child-task-home-btn {
+  text-align: left;
+  font-size: 2.8rem;
+  line-height: 4vh;
+  width: 8vw;
+  height: 6vh;
+  margin-left: 1vw;
+  border: none;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #649c9d;
 }
 .child-task .return-box .return-text {
   text-align: left;
