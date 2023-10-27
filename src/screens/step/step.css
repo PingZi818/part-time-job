@@ -1,3 +1,21 @@
+.title-box {
+}
+.title-content {
+  white-space: nowrap;
+  width: max-content;
+}
+.animation-class {
+  animation: roll 10s 0.3s linear infinite;
+}
+.animation-class::after {
+  content: attr(data-title);
+  padding: 0 5em;
+}
+@keyframes roll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
 .left-btn-box,
 .middle-btn-box,
 .right-btn-box {
@@ -185,14 +203,19 @@
 .step-item-info .id-card-info,
 .step-item-info .phone-info {
   display: flex;
-  font-size: 30px;
+  font-size: 48px;
   justify-content: center;
+  align-items: center;
 }
 .step-item-info .action-box {
   font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .step-item-info .link-btn {
   font-size: 28px;
   color: rgb(80, 167, 194);
   cursor: pointer;
+  margin-left: 10px;
 }

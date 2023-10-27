@@ -35,6 +35,10 @@ export const PhoneInput = ({
       </div>
       <Modal
         visible={visible}
+        maskStyle={{
+          backdropFilter: "blur(8px)",
+          background: "rgba(0, 0, 0, 0)",
+        }}
         bodyClassName="number-key-board-content"
         content={
           <NumberKeyBoardModal

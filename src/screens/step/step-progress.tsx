@@ -1,7 +1,6 @@
 import React from "react";
-import { Image, Grid, AutoCenter } from "antd-mobile";
+import { AutoCenter } from "antd-mobile";
 import styled from "@emotion/styled";
-import stepArrowSrc from "assets/step-arrow.png";
 
 export const StepProgress = ({
   stepKey,
@@ -10,19 +9,19 @@ export const StepProgress = ({
   stepKey: number;
   stepData: { key: string; name: string }[];
 }) => {
+  const getClassName = (i: number) => {
+    const lastIndex = stepData.length - 1;
+    if (i < stepKey || stepKey === lastIndex) return "pass-step-item";
+    if (i === stepKey && stepKey !== lastIndex) return "active-step-item";
+    return "";
+  };
   return (
     <div className="step-item-list">
       {stepData?.map((item, i) => {
         return (
           <StepItemBox
             key={item.key}
-            className={
-              i < stepKey
-                ? "step-item-box pass-step-item"
-                : i === stepKey
-                ? "step-item-box active-step-item"
-                : "step-item-box"
-            }
+            className={`step-item-box ${getClassName(i)}`}
           >
             <CircleItem className="circle-item">{i + 1}</CircleItem>
             <StepNameItem className="step-name-item">{item.name}</StepNameItem>

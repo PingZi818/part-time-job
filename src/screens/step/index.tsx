@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDocumentTitle } from "utils";
 import { useNavigate } from "react-router-dom";
 import { AutoCenter, Dialog, Toast, Image, Modal } from "antd-mobile";
@@ -8,6 +8,7 @@ import "./step.css";
 import peopleSrc from "assets/people.png";
 import { useHttp } from "utils/http";
 import {
+  checkID,
   useChildTaskInUrl,
   useInterval,
   validateIdCard,
@@ -53,6 +54,7 @@ export const StepScreen = () => {
 
   const { data: currentChildTask } = useChildTaskInUrl();
   const { data: currentMachineStatus } = useMachineStatus();
+  //   setTitle(currentChildTask?.businessName || '')
   useInterval(
     () => {
       setNum(num - 1);
@@ -68,17 +70,17 @@ export const StepScreen = () => {
       const res = getUserCardId();
       if (!res) return;
       if (res.status) {
-        Toast.show({
-          icon: "success",
-          content: "识别成功",
-        });
+        // Toast.show({
+        //   icon: "success",
+        //   content: "识别成功",
+        // });
         setIDNumber(res.data.id);
         setUserName(res.data.name || "");
       } else {
-        Toast.show({
-          icon: "fail",
-          content: "暂未识别到您的信息，请您重新放置或手动输入身份信息",
-        });
+        // Toast.show({
+        //   icon: "fail",
+        //   content: "暂未识别到您的信息，请您重新放置或手动输入身份信息",
+        // });
       }
     },
     stepKey === 0 && !IDNumber && takeType === "1" ? 3000 : null
@@ -120,7 +122,7 @@ export const StepScreen = () => {
     }
     // 如果在身份证号码填写页则需要校验身份证号码
     if (stepKey === 0 && takeType !== "3") {
-      if (validateIdCard(IDNumber)) {
+      if (checkID(IDNumber)) {
         setStepKey(stepKey + 1);
         // TO DO 通过身份证号拿手机号
       } else {
@@ -141,7 +143,6 @@ export const StepScreen = () => {
   //   手动输入
   const inputManually = () => {
     setVisible(true);
-    setTakeType("2");
   };
 
   // 临时取号
@@ -177,7 +178,7 @@ export const StepScreen = () => {
             const handler = Dialog.show({
               content: (
                 <DialogShow
-                  content={res.message}
+                  content={res.message || "机器故障"}
                   close={() => handler.close()}
                 />
               ),
@@ -202,10 +203,35 @@ export const StepScreen = () => {
       });
     }
   };
+  const ref = useRef<any>(null);
+  const refContent = useRef<any>(null);
+  const [isOverflow, setIsOverflow] = useState(false);
+  const isOverflowFun = () => {
+    const width = ref.current?.offsetWidth || 0;
+    const contentWidth = refContent.current?.offsetWidth || 0;
+    if (contentWidth > width) {
+      refContent.current.style.animationDuration = contentWidth / 110 + "s";
+      return true;
+    }
+    return false;
+  };
+  useEffect(() => {
+    const flag = isOverflowFun();
+    setIsOverflow(flag);
+    return () => setIsOverflow(false);
+  }, [currentChildTask?.businessName]);
   return (
     <>
       <CardTitle>
-        <Title>{currentChildTask?.businessName}</Title>
+        <Title className="title-box" ref={ref}>
+          <div
+            className={`title-content ${isOverflow ? "animation-class" : ""}`}
+            data-title={currentChildTask?.businessName}
+            ref={refContent}
+          >
+            {currentChildTask?.businessName}
+          </div>
+        </Title>
         <TextBox>
           <Image src={peopleSrc} width={"4vw"} height={"6vh"} fit="contain" />
           等待人数：{currentMachineStatus?.takeNum}
@@ -286,8 +312,14 @@ export const StepScreen = () => {
               "X",
               "delete",
             ]}
-            onClose={() => setVisible(false)}
-            onConfirm={setIDNumber}
+            onClose={() => {
+              setVisible(false);
+              setTakeType("1");
+            }}
+            onConfirm={(num) => {
+              setIDNumber(num);
+              setTakeType("2");
+            }}
             onResetTime={onResetTime}
           />
         }
@@ -330,6 +362,7 @@ const TextBox = styled.div`
   justify-content: center;
   padding: 1.5rem 0;
   color: #75c4cb;
-  font-size: 48px;
+  font-size: 36px;
   font-weight: bold;
+  white-space: nowrap;
 `;

@@ -8,7 +8,7 @@ import clearSrc from "assets/clear.png";
 import { typeName } from "types";
 import DialogShow from "components/dialog-show";
 import { useMount } from "utils";
-import { validateIdCard, validatePhone } from "./util";
+import { checkID, validatePhone } from "./util";
 export const NumberKeyBoardModal = ({
   title,
   type,
@@ -40,7 +40,7 @@ export const NumberKeyBoardModal = ({
   const handleOk = () => {
     onResetTime();
     if (type === typeName.IDCard) {
-      if (validateIdCard(numberStr)) {
+      if (checkID(numberStr)) {
         onConfirm(numberStr);
         handleClose();
       } else {
@@ -69,7 +69,8 @@ export const NumberKeyBoardModal = ({
       }
     }
   };
-  const handleClickButton = (num: string) => {
+  const handleClickButton = (e: any, num: string) => {
+    e.preventDefault();
     onResetTime();
     if (num === "clear") {
       handleClear();
@@ -125,7 +126,7 @@ export const NumberKeyBoardModal = ({
                         className="keyword-btn"
                         block
                         color="primary"
-                        onClick={() => handleClickButton(num)}
+                        onClick={(e) => handleClickButton(e, num)}
                       >
                         {num === "clear" ? (
                           <Image src={clearSrc} height={"4vh"} fit="contain" />

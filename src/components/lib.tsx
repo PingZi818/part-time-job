@@ -71,11 +71,14 @@ export const ButtonNoPadding = styled(Button)`
   padding: 0;
 `;
 
-export const Title = styled(AutoCenter)`
+export const Title = styled.div`
   padding: 1.5rem 0;
   color: rgb(255, 255, 255);
   font-size: 48px;
   font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-right: 10px;
 `;
 export const LogoTitle = styled(AutoCenter)`
   color: #fff;

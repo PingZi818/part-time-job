@@ -27,6 +27,7 @@ export const getUserCardId = () => {
 export const setPrint = (data: any) => {
   // @ts-ignore
   const androidJSBridge = window?.androidJSBridge || null;
-  if (androidJSBridge) return androidJSBridge.setPrint(JSON.stringify(data));
+  if (androidJSBridge)
+    return JSON.parse(androidJSBridge.setPrint(JSON.stringify(data)));
   return null;
 };
