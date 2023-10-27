@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { CloseOutline } from "antd-mobile-icons";
 import "./number-key-board-modal.css";
 import { Button, Image, Grid, Input, Dialog } from "antd-mobile";
 import styled from "@emotion/styled";
@@ -105,6 +106,7 @@ export const NumberKeyBoardModal = ({
                   readOnly
                   max={type === typeName.IDCard ? 18 : 11}
                 ></Input>
+                <CloseOutline onClick={handleClear} className="icon-close" />
               </div>
             </Grid.Item>
           </Grid>

@@ -5,9 +5,18 @@
   margin-top: 2vh;
 }
 .number-key-board-modal .modal-body .modal-input .input-box {
+  position: relative;
   height: 68px;
   border: solid 1px #61b4c6;
   border-radius: 6px;
+}
+.number-key-board-modal .modal-body .input-box .icon-close {
+  cursor: pointer;
+  position: absolute;
+  font-size: 20px;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .number-key-board-modal .modal-body .modal-input .input-box .adm-input-element {
   font-weight: bold;

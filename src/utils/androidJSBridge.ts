@@ -3,7 +3,7 @@
 export const getUid = () => {
   // @ts-ignore
   const androidJSBridge = window?.androidJSBridge || null;
-  if (androidJSBridge) return androidJSBridge.getUid();
+  if (androidJSBridge) return JSON.parse(androidJSBridge.getUid());
   return null;
 };
 
@@ -11,7 +11,7 @@ export const getUid = () => {
 export const getMac = () => {
   // @ts-ignore
   const androidJSBridge = window?.androidJSBridge || null;
-  if (androidJSBridge) return androidJSBridge.getMac();
+  if (androidJSBridge) return JSON.parse(androidJSBridge.getMac());
   return null;
 };
 
@@ -19,14 +19,14 @@ export const getMac = () => {
 export const getUserCardId = () => {
   // @ts-ignore
   const androidJSBridge = window?.androidJSBridge || null;
-  if (androidJSBridge) return androidJSBridge.getUserCardId();
+  if (androidJSBridge) return JSON.parse(androidJSBridge.getUserCardId());
   return null;
 };
 
 //设置打印信息
-export const setPrint = () => {
+export const setPrint = (data: any) => {
   // @ts-ignore
   const androidJSBridge = window?.androidJSBridge || null;
-  if (androidJSBridge) return androidJSBridge.setPrint();
+  if (androidJSBridge) return androidJSBridge.setPrint(JSON.stringify(data));
   return null;
 };

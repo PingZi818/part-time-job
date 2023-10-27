@@ -21,7 +21,7 @@ import DialogShow from "components/dialog-show";
 import { NumberKeyBoardModal } from "./number-key-board-modal";
 import { typeName } from "types";
 import { useMachineStatus } from "utils/task";
-import { getUserCardId } from "utils/androidJSBridge";
+import { getUserCardId, setPrint } from "utils/androidJSBridge";
 import FooterText from "components/footer";
 
 export const StepScreen = () => {
@@ -114,7 +114,10 @@ export const StepScreen = () => {
 
   // 下一步
   const handleNextStep = () => {
-    if (stepKey >= stepData.length - 1) return;
+    if (stepKey >= stepData.length - 1) {
+      navigate("/");
+      return;
+    }
     // 如果在身份证号码填写页则需要校验身份证号码
     if (stepKey === 0 && takeType !== "3") {
       if (validateIdCard(IDNumber)) {
@@ -151,7 +154,7 @@ export const StepScreen = () => {
   const onGetFinalNo = () => {
     if (validatePhone(phoneNumber)) {
       const params = {
-        applyUserName: userName || "张三",
+        applyUserName: userName || "",
         businessId: currentChildTask?.businessId,
         takeType: takeType,
         identityCardNum: IDNumber,
@@ -160,22 +163,24 @@ export const StepScreen = () => {
       client("getTakeNo", { data: params, method: "POST" })
         .then((takeRes) => {
           setStepKey(stepKey + 1);
-          // TO DO 调用设备的取号接口， 发起取号动作
-          // @ts-ignore
-          const androidJSBridge = window.androidJSBridge;
-          if (androidJSBridge) {
-            const res = androidJSBridge.setPrint(...takeRes);
-            if (res.status) {
-            } else {
-              Toast.show({
-                icon: "fail",
-                content: "机器故障",
-              });
-            }
+          const res = setPrint(takeRes);
+          if (!res) {
+            const handler = Dialog.show({
+              content: (
+                <DialogShow content="机器故障" close={() => handler.close()} />
+              ),
+            });
+            return;
+          }
+          if (res?.status) {
           } else {
-            Toast.show({
-              icon: "fail",
-              content: "机器故障",
+            const handler = Dialog.show({
+              content: (
+                <DialogShow
+                  content={res.message}
+                  close={() => handler.close()}
+                />
+              ),
             });
           }
         })
