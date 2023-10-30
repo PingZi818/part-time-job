@@ -8,3 +8,19 @@ export const useGetTakeNo = (param: DIOTakeNoSave) => {
     client("getTakeNo", { data: param, method: "POST" })
   );
 };
+export const useGetPhoneNumByIdCard = (param: { identityCardNum: string }) => {
+  const client = useHttp();
+  return useQuery<{ phoneNumber: string; residentName: string }>(
+    ["getResident", param],
+    async () => client("getResident", { data: param, method: "POST" })
+  );
+};
+export const useSetPrintStatus = (param: {
+  isPrinted: boolean;
+  takeNoId: string;
+}) => {
+  const client = useHttp();
+  return useQuery<any>(["setPrintStatus", param], async () =>
+    client("setPrintStatus", { data: param, method: "POST" })
+  );
+};

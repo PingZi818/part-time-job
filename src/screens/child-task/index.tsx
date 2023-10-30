@@ -15,7 +15,7 @@ import { useInterval } from "screens/step/util";
 export const ChildTasksScreen = () => {
   const { data: currentTask, isLoading } = useTaskInUrl();
   const { kindName, businessList } = { ...currentTask };
-  useDocumentTitle(kindName || "事项子分类", false);
+  useDocumentTitle("取号管理系统", false);
   const goBackPage = () => {
     window.history.back();
   };
@@ -50,21 +50,17 @@ export const ChildTasksScreen = () => {
           color="primary"
           onClick={goBackPage}
         >
-          <Grid columns={3} gap={8}>
-            <Grid.Item>
-              <AutoCenter>
-                <Image
-                  src={prevStepSrc}
-                  width={"4vw"}
-                  height={"4vh"}
-                  fit="contain"
-                />
-              </AutoCenter>
-            </Grid.Item>
-            <Grid.Item span={2}>
-              <div className="return-text">返回</div>
-            </Grid.Item>
-          </Grid>
+          <div className="btn-with-icon">
+            <AutoCenter>
+              <Image
+                src={prevStepSrc}
+                width={"2vw"}
+                height={"4vh"}
+                fit="contain"
+              />
+            </AutoCenter>
+            <div className="btn-text">返回</div>
+          </div>
         </Button>
         <Button
           className="child-task-home-btn"
@@ -72,21 +68,12 @@ export const ChildTasksScreen = () => {
           color="primary"
           onClick={goHomePage}
         >
-          <Grid columns={3} gap={8}>
-            <Grid.Item>
-              <AutoCenter>
-                <Image
-                  src={homeSrc}
-                  width={"4vw"}
-                  height={"4vh"}
-                  fit="contain"
-                />
-              </AutoCenter>
-            </Grid.Item>
-            <Grid.Item span={2}>
-              <div className="return-text">首页</div>
-            </Grid.Item>
-          </Grid>
+          <div className="btn-with-icon">
+            <AutoCenter>
+              <Image src={homeSrc} width={"2vw"} height={"4vh"} fit="contain" />
+            </AutoCenter>
+            <div className="btn-text">首页</div>
+          </div>
         </Button>
       </CardContentFooter>
       <FooterText time={num} />
@@ -100,8 +87,13 @@ const CardContentBox = styled(CardContent)`
   padding-top: 4vh;
 `;
 const CardContentFooter = styled(CardContent)`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
   justify-content: start;
   padding-top: 4vh;
   height: 100px;
+  padding: 0 40px;
   margin-bottom: 2vh;
+  align-items: start;
 `;

@@ -1,8 +1,11 @@
 .total-paper-num {
   padding: 1.5rem 0;
   color: rgb(255, 255, 255);
-  font-size: 48px;
+  font-size: 4.4vh;
   font-weight: bold;
+}
+.total-paper-num.red-color {
+  color: red;
 }
 .task-item {
   width: 22vw;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image } from "antd-mobile";
 import IDCardGifSrc from "assets/id-card.gif";
 const IdCardInfo = ({

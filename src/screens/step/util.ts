@@ -134,7 +134,7 @@ function checkCode(val: any) {
     for (let i = 0; i < 17; i++) {
       sum += val[i] * factor[i];
     }
-    if (parity[sum % 11] === code.toUpperCase()) {
+    if (parity[sum % 11] == code.toUpperCase()) {
       return true;
     }
   }

@@ -10,14 +10,14 @@ import LayoutBox from "components/layout";
 export default function UnauthenticatedApp() {
   const [error, setError] = useState<Error | null>(null);
 
-  useDocumentTitle("请登录以继续");
+  useDocumentTitle("取号管理系统");
 
   return (
     <LayoutBox
       content={
-        <div>
+        <div className="login-container">
           <CardTitle>
-            <Title>xxxxxx村社区取号系统</Title>
+            <Title>取号管理系统</Title>
           </CardTitle>
           <CardContentBox>
             <BgLeft></BgLeft>
@@ -48,12 +48,12 @@ const BgLeft = styled.div`
 `;
 const LoginBox = styled.div`
   width: 34vw;
-  height: 40vh;
+  height: 46vh;
   margin-left: 1.5vw;
   text-align: center;
 `;
 const LoginBoxContent = styled.div`
   max-width: 65.4rem;
-  height: 31.1rem;
+  height: 30vh;
   text-align: center;
 `;

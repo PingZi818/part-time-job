@@ -1,9 +1,7 @@
 export interface ChildTask {
   businessId: string;
   businessName: string;
-  communityId: string;
-  windowId: string;
-  kindName?: string;
+  waitingNum: string;
 }
 export interface DIOTakeNoSave {
   applyUserName: string;

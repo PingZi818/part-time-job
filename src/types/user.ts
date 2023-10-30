@@ -1,7 +1,6 @@
 export interface User {
-  userId: string;
+  communityName: string;
   userName: string;
-  userType: string;
+  machineName: string;
   userToken: string;
-  empName: string;
 }

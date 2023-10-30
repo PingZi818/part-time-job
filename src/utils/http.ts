@@ -3,6 +3,7 @@ import * as auth from "auth-provider";
 import { useAuth } from "context/auth-context";
 import { useCallback } from "react";
 import { getMac } from "./androidJSBridge";
+import { setEncrypt } from "./encrypt";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 interface Config extends RequestInit {
@@ -32,9 +33,9 @@ export const http = async (
   };
 
   if (config.method.toUpperCase() === "GET") {
-    endpoint += `?${qs.stringify(dataRes)}`;
+    endpoint += `?${setEncrypt(qs.stringify(dataRes))}`;
   } else {
-    config.body = JSON.stringify(dataRes || {});
+    config.body = setEncrypt(JSON.stringify(dataRes || {})) || null;
   }
   // axios 和 fetch 的表现不一样，axios可以直接在返回状态不为2xx的时候抛出异常
   return window

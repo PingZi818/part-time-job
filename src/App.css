@@ -23,3 +23,7 @@ html body #root .App {
   text-align: center;
   align-items: center;
 }
+.exit-icon {
+  margin-left: 2rem;
+  cursor: pointer;
+}

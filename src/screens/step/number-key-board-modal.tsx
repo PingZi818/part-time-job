@@ -9,6 +9,10 @@ import { typeName } from "types";
 import DialogShow from "components/dialog-show";
 import { useMount } from "utils";
 import { checkID, validatePhone } from "./util";
+import {
+  playCardInputInvalid,
+  playPhoneInputInvalid,
+} from "utils/androidJSBridge";
 export const NumberKeyBoardModal = ({
   title,
   type,
@@ -44,6 +48,7 @@ export const NumberKeyBoardModal = ({
         onConfirm(numberStr);
         handleClose();
       } else {
+        playCardInputInvalid();
         const handler = Dialog.show({
           content: (
             <DialogShow
@@ -58,6 +63,7 @@ export const NumberKeyBoardModal = ({
         onConfirm(numberStr);
         handleClose();
       } else {
+        playPhoneInputInvalid();
         const handler = Dialog.show({
           content: (
             <DialogShow

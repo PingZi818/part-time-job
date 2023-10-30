@@ -1,16 +1,35 @@
 import React from "react";
 import styled from "@emotion/styled";
 import loginBg from "assets/login-bg.png";
-import { Button } from "antd-mobile";
+import exitBgSrc from "assets/exit.png";
+import { Button, Image } from "antd-mobile";
 import { useAuth } from "context/auth-context";
-import { ImgBox, LoginLogoBox, LogoTitle, ShadowCard, Title } from "./lib";
+import * as auth from "auth-provider";
+import { ImgBox, LoginLogoBox, LogoTitle, ShadowCard } from "./lib";
 export default function LayoutBox(props: any) {
   const { user } = useAuth();
+  const exitLogin = async () => {
+    await auth.logout();
+    window.location.reload();
+    return Promise.reject({ message: "已退出登录" });
+  };
   return (
     <Container>
       <LoginLogoBox>
-        <ImgBox />
-        <LogoTitle>{user?.empName}</LogoTitle>
+        <LeftLoginBox>
+          <ImgBox />
+          <LogoTitle>{user?.communityName}</LogoTitle>
+        </LeftLoginBox>
+        <ExitContainer>
+          <LogoTitle>{user?.userName || ""}</LogoTitle>
+          <Image
+            className="exit-icon"
+            onClick={() => exitLogin()}
+            src={exitBgSrc}
+            height={"4vh"}
+            fit="contain"
+          />
+        </ExitContainer>
       </LoginLogoBox>
       <ShadowCard
         bodyStyle={{
@@ -35,4 +54,17 @@ const Container = styled.div`
   background-size: cover;
   width: 100%;
   padding-top: 2rem;
+`;
+const LeftLoginBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const ExitContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: end;
+  right: 3vw;
+  margin-left: 4vw;
+  margin-right: 1rem;
+  align-items: center;
 `;

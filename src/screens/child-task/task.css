@@ -56,21 +56,28 @@
   --dot-spacing: 10px;
 }
 .child-task-return-box {
-  text-align: left;
+  text-align: center;
   font-size: 2.8rem;
   line-height: 4vh;
   width: 8vw;
   height: 6vh;
   background: #57626b;
-  margin-left: 2vw;
   border: none;
   top: 50%;
+  padding: 0 20px;
   transform: translateY(-50%);
 }
+
+.child-task-return-box.adm-button-block,
+.child-task-home-btn.adm-button-block {
+  width: fit-content;
+}
+
 .child-task-home-btn {
-  text-align: left;
+  text-align: center;
   font-size: 2.8rem;
   line-height: 4vh;
+  padding: 0 20px;
   width: 8vw;
   height: 6vh;
   margin-left: 1vw;

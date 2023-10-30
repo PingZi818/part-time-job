@@ -31,3 +31,59 @@ export const setPrint = (data: any) => {
     return JSON.parse(androidJSBridge.setPrint(JSON.stringify(data)));
   return null;
 };
+//请放入身份证
+export const playCardReady = () => {
+  // @ts-ignore
+  const androidJSBridge = window?.androidJSBridge || null;
+  if (androidJSBridge) return androidJSBridge.playCardReady();
+  return null;
+};
+//读取身份证成功
+export const playCardSuccess = () => {
+  // @ts-ignore
+  const androidJSBridge = window?.androidJSBridge || null;
+  if (androidJSBridge) return androidJSBridge.playCardSuccess();
+  return null;
+};
+//请输入身份证号
+export const playCardInput = () => {
+  // @ts-ignore
+  const androidJSBridge = window?.androidJSBridge || null;
+  if (androidJSBridge) return androidJSBridge.playCardInput();
+  return null;
+};
+//输入身份证号无效
+export const playCardInputInvalid = () => {
+  // @ts-ignore
+  const androidJSBridge = window?.androidJSBridge || null;
+  if (androidJSBridge) return androidJSBridge.playCardInputInvalid();
+  return null;
+};
+//请输入手机号
+export const playPhoneInput = () => {
+  // @ts-ignore
+  const androidJSBridge = window?.androidJSBridge || null;
+  if (androidJSBridge) return androidJSBridge.playPhoneInput();
+  return null;
+};
+//输入手机号无效
+export const playPhoneInputInvalid = () => {
+  // @ts-ignore
+  const androidJSBridge = window?.androidJSBridge || null;
+  if (androidJSBridge) return androidJSBridge.playPhoneInputInvalid();
+  return null;
+};
+//取号成功
+export const playTakeSuccess = () => {
+  // @ts-ignore
+  const androidJSBridge = window?.androidJSBridge || null;
+  if (androidJSBridge) return androidJSBridge.playTakeSuccess();
+  return null;
+};
+//取号失败（返回信息内容包含（无法取号））
+export const playTakeFail = () => {
+  // @ts-ignore
+  const androidJSBridge = window?.androidJSBridge || null;
+  if (androidJSBridge) return JSON.parse(androidJSBridge.playTakeFail());
+  return null;
+};

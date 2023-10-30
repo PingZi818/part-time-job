@@ -74,19 +74,20 @@ export const ButtonNoPadding = styled(Button)`
 export const Title = styled.div`
   padding: 1.5rem 0;
   color: rgb(255, 255, 255);
-  font-size: 48px;
+  font-size: 4.4vh;
   font-weight: bold;
   overflow: hidden;
   white-space: nowrap;
   margin-right: 10px;
 `;
-export const LogoTitle = styled(AutoCenter)`
+export const LogoTitle = styled.div`
   color: #fff;
-  font-size: 48px;
+  font-size: 4.4vh;
+  line-height: 4.4vh;
   font-weight: bold;
+  height: 4.8vh;
 `;
 export const CardTitle = styled.div`
-  height: 12vh;
   padding: 0 4rem;
   position: relative;
   text-align: center;
@@ -104,7 +105,8 @@ export const CardContent = styled.div`
 `;
 export const LoginLogoBox = styled.div`
   display: flex;
-  align-items: end;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   text-align: left;
 `;
@@ -113,6 +115,7 @@ export const ImgBox = styled.div`
   width: 45.4rem;
   display: inline-block;
   height: 7vh;
+  margin-left: 4vw;
   margin-right: 1rem;
   background: url(${loginLogo}) no-repeat center;
   background-size: contain;

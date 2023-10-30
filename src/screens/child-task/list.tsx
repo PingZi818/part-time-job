@@ -46,7 +46,7 @@ export const List = ({ tasks, loading }: ListProps) => {
     </Swiper.Item>
   ));
   const listItems = (
-    <div>
+    <>
       {items.length > 1 ? (
         <Swiper
           allowTouchMove={true}
@@ -87,7 +87,7 @@ export const List = ({ tasks, loading }: ListProps) => {
           <Image src={rightArrowSrc} width={100} height={100} fit="contain" />
         </div>
       )}
-    </div>
+    </>
   );
   return <>{loading ? <SpinLoading /> : listItems}</>;
 };

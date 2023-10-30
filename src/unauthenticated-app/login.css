@@ -6,21 +6,21 @@
 .adm-list-item-content {
   border-bottom: solid 2px #61b4c6;
   border-top: none !important;
-  margin-top: 1vw;
+  margin-top: 1.8vh;
 }
 .adm-list-item-content-prefix {
   width: 3vw;
 }
 .adm-input-element {
-  font-size: 3rem;
+  font-size: 3vh;
   font-weight: normal;
   color: #333;
 }
 .adm-list-item-content-main {
-  padding: 1vw;
+  padding: 1vw 1.8vh;
 }
 .adm-form-item.adm-form-item-horizontal .adm-list-item-content-prefix {
-  padding: 1vw 0;
+  padding: 1.8vh 0;
 }
 .adm-form-item-label {
   text-align: left;
@@ -28,15 +28,19 @@
 .adm-form-item-feedback-error {
   text-align: left;
 }
+.login-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 .form-box {
   position: relative;
-  padding: 1vw 1vw 3vw 1vw;
-  padding-top: 10px;
+  padding: 1.8vh 1vw 5.3vh 1vw;
+  padding-top: 1vh;
   border-radius: 1.5rem;
   border: solid 2px #61b4c6;
 }
 .user-icon,
 .user-password {
-  width: 35px;
-  height: 37px;
+  width: 1.8vw;
 }

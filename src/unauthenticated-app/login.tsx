@@ -43,53 +43,51 @@ export const LoginScreen = ({
   };
 
   return (
-    <div>
-      <div className="form-box">
-        <Form layout="horizontal" onFinish={handleSubmit}>
-          <Form.Item
-            label={<img className="user-icon" alt="user" src={userImg} />}
-            name={"userName"}
-          >
-            <Input
-              placeholder={"请输入用户名"}
-              type="text"
-              id={"userName"}
-              maxLength={20}
-              clearable
-            />
-          </Form.Item>
-          <Form.Item
-            label={<img className="user-password" alt="lock" src={lockImg} />}
-            name={"userPassword"}
-            extra={
-              <div css={eye}>
-                {!visible ? (
-                  <EyeInvisibleOutline
-                    style={{ fontSize: "30px" }}
-                    onClick={() => setVisible(true)}
-                  />
-                ) : (
-                  <EyeOutline
-                    style={{ fontSize: "30px" }}
-                    onClick={() => setVisible(false)}
-                  />
-                )}
-              </div>
-            }
-          >
-            <Input
-              placeholder={"请输入密码"}
-              type={visible ? "text" : "password"}
-              id={"userPassword"}
-              maxLength={20}
-              clearable
-            />
-          </Form.Item>
-          <LoginButton loading={isLoading} type={"submit"} color={"primary"}>
-            登录系统
-          </LoginButton>
-        </Form>
-      </div>
+    <div className="form-box">
+      <Form layout="horizontal" onFinish={handleSubmit}>
+        <Form.Item
+          label={<img className="user-icon" alt="user" src={userImg} />}
+          name={"userName"}
+        >
+          <Input
+            placeholder={"请输入用户名"}
+            type="text"
+            id={"userName"}
+            maxLength={20}
+            clearable
+          />
+        </Form.Item>
+        <Form.Item
+          label={<img className="user-password" alt="lock" src={lockImg} />}
+          name={"userPassword"}
+          extra={
+            <div css={eye}>
+              {!visible ? (
+                <EyeInvisibleOutline
+                  style={{ fontSize: "30px" }}
+                  onClick={() => setVisible(true)}
+                />
+              ) : (
+                <EyeOutline
+                  style={{ fontSize: "30px" }}
+                  onClick={() => setVisible(false)}
+                />
+              )}
+            </div>
+          }
+        >
+          <Input
+            placeholder={"请输入密码"}
+            type={visible ? "text" : "password"}
+            id={"userPassword"}
+            maxLength={20}
+            clearable
+          />
+        </Form.Item>
+        <LoginButton loading={isLoading} type={"submit"} color={"primary"}>
+          登录系统
+        </LoginButton>
+      </Form>
     </div>
   );
 };
@@ -97,10 +95,10 @@ export const LoginScreen = ({
 export const LoginButton = styled(Button)`
   position: absolute !important;
   left: 0;
-  bottom: -12rem;
+  bottom: -12vh;
   width: 100%;
-  height: 7.5rem !important;
+  height: 7vh !important;
   background: #61b4c6 !important;
-  font-size: 3rem !important;
+  font-size: 3vh !important;
   border: none !important;
 `;
