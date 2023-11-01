@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useDocumentTitle } from "utils"
 import { CardContent, CardTitle, Title } from "components/lib"
-import { Button, Image, Grid, AutoCenter } from "antd-mobile"
+import { Button, Image, AutoCenter } from "antd-mobile"
 import { List } from "screens/child-task/list"
 import "./task.css"
 import styled from "@emotion/styled"
