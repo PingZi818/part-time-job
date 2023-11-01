@@ -64,7 +64,7 @@ export function checkID(value: string) {
 //1、省级地址码的方法--固定
 function checkProv(val: any) {
   var pattern = /^[1-9][0-9]/
-  var provs: any = {
+  var province: any = {
     11: "北京",
     12: "天津",
     13: "河北",
@@ -101,7 +101,7 @@ function checkProv(val: any) {
     82: "澳门",
   }
   if (pattern.test(val)) {
-    if (provs[val]) {
+    if (province[val]) {
       return true
     }
   }
