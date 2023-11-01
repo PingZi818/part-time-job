@@ -1,7 +1,7 @@
 {
   "name": "task",
   "version": "0.1.0",
-  "homepage" : ".",
+  "homepage": ".",
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@emotion/core": "^11.0.0",
@@ -37,7 +37,6 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r git@github.com:sindu12jun/sindu12jun.github.io.git -b main",
     "prepare": "husky install"
   },
   "eslintConfig": {

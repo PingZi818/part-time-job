@@ -130,10 +130,15 @@
 }
 
 .get-number-btn {
-  width: 12vw;
-  height: 6vh;
   background: #61b4c6;
+  text-align: center;
+  font-size: 2.6vh;
+  line-height: 4vh;
+  height: 6vh;
   border: none;
+  top: 50%;
+  padding: 0 20px;
+  transform: translateY(-50%);
 }
 .step-box .middle-box {
   width: 16vw;

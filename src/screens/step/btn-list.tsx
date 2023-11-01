@@ -1,9 +1,9 @@
-import React from "react";
-import { AutoCenter, Button, Grid, Image } from "antd-mobile";
-import prevStepSrc from "assets/prev-step.png";
-import nextStepSrc from "assets/next-step.png";
-import homeSrc from "assets/home.png";
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import { AutoCenter, Button, Grid, Image } from "antd-mobile"
+import prevStepSrc from "assets/prev-step.png"
+import nextStepSrc from "assets/next-step.png"
+import homeSrc from "assets/home.png"
+import { useNavigate } from "react-router-dom"
 
 export const BtnList = ({
   IDNumber,
@@ -16,29 +16,29 @@ export const BtnList = ({
   inputManually,
   onResetTime,
 }: {
-  IDNumber: string;
-  stepKey: number;
-  stepData: { key: string; name: string }[];
-  onNext: () => void;
-  onPrev: () => void;
-  quickGetNo: () => void;
-  onGetFinalNo: () => void;
-  inputManually: () => void;
-  onResetTime: () => void;
+  IDNumber: string
+  stepKey: number
+  stepData: { key: string; name: string }[]
+  onNext: () => void
+  onPrev: () => void
+  quickGetNo: () => void
+  onGetFinalNo: () => void
+  inputManually: () => void
+  onResetTime: () => void
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const goNextStep = () => {
-    onResetTime();
-    onNext();
-  };
+    onResetTime()
+    onNext()
+  }
   const goPreStep = () => {
-    onResetTime();
-    onPrev();
-  };
+    onResetTime()
+    onPrev()
+  }
   const goHomePage = () => {
     // 点击返回首页
-    navigate("/");
-  };
+    navigate("/")
+  }
   return (
     <>
       <div className="left-btn-box">
@@ -89,8 +89,8 @@ export const BtnList = ({
               block
               color="primary"
               onClick={() => {
-                onResetTime();
-                inputManually();
+                onResetTime()
+                inputManually()
               }}
             >
               <div className="font-size-28">去手动输入</div>
@@ -102,8 +102,8 @@ export const BtnList = ({
               block
               color="primary"
               onClick={() => {
-                onResetTime();
-                quickGetNo();
+                onResetTime()
+                quickGetNo()
               }}
             >
               <div className="font-size-28">临时取号</div>
@@ -140,8 +140,8 @@ export const BtnList = ({
             shape="rounded"
             color="primary"
             onClick={() => {
-              onResetTime();
-              onGetFinalNo();
+              onResetTime()
+              onGetFinalNo()
             }}
           >
             <div className="font-size-28">去取号</div>
@@ -149,5 +149,5 @@ export const BtnList = ({
         )}
       </div>
     </>
-  );
-};
+  )
+}

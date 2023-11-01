@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
 export const PhoneInput = ({
   phoneNumber,
   handleEdit,
 }: {
-  phoneNumber: string;
-  handleEdit: () => void;
+  phoneNumber: string
+  handleEdit: () => void
 }) => {
   return (
     <div className="step-item-info">
@@ -16,5 +16,5 @@ export const PhoneInput = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

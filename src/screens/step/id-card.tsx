@@ -1,12 +1,12 @@
-import React from "react";
-import { Image } from "antd-mobile";
-import IDCardGifSrc from "assets/id-card.gif";
+import React from "react"
+import { Image } from "antd-mobile"
+import IDCardGifSrc from "assets/id-card.gif"
 const IdCardInfo = ({
   value,
   handleEClear,
 }: {
-  value: string;
-  handleEClear: () => void;
+  value: string
+  handleEClear: () => void
 }) => {
   return (
     <div className="step-item-info">
@@ -18,14 +18,14 @@ const IdCardInfo = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 const IdCardManuallyInfo = ({
   value,
   setEdit,
 }: {
-  value: string;
-  setEdit: () => void;
+  value: string
+  setEdit: () => void
 }) => {
   return (
     <div className="step-item-info">
@@ -36,8 +36,8 @@ const IdCardManuallyInfo = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 export const IdCard = ({
   value,
   takeType,
@@ -45,20 +45,20 @@ export const IdCard = ({
   setEdit,
   onResetTime,
 }: {
-  value: string;
-  takeType: string;
-  setIDNumber: () => void;
-  setEdit: () => void;
-  onResetTime: () => void;
+  value: string
+  takeType: string
+  setIDNumber: () => void
+  setEdit: () => void
+  onResetTime: () => void
 }) => {
   const handleEdit = () => {
-    onResetTime();
-    setEdit();
-  };
+    onResetTime()
+    setEdit()
+  }
   const handleEClear = () => {
-    onResetTime();
-    setIDNumber();
-  };
+    onResetTime()
+    setIDNumber()
+  }
   return (
     <>
       {value ? (
@@ -78,5 +78,5 @@ export const IdCard = ({
         </div>
       )}
     </>
-  );
-};
+  )
+}

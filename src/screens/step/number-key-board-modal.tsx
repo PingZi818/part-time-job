@@ -1,18 +1,18 @@
-import React, { useCallback, useState } from "react";
-import { CloseOutline } from "antd-mobile-icons";
-import "./number-key-board-modal.css";
-import { Button, Image, Grid, Input, Dialog } from "antd-mobile";
-import styled from "@emotion/styled";
-import deleteSrc from "assets/delete.png";
-import clearSrc from "assets/clear.png";
-import { typeName } from "types";
-import DialogShow from "components/dialog-show";
-import { useMount } from "utils";
-import { checkID, validatePhone } from "./util";
+import React, { useCallback, useState } from "react"
+import { CloseOutline } from "antd-mobile-icons"
+import "./number-key-board-modal.css"
+import { Button, Image, Grid, Input, Dialog } from "antd-mobile"
+import styled from "@emotion/styled"
+import deleteSrc from "assets/delete.png"
+import clearSrc from "assets/clear.png"
+import { typeName } from "types"
+import DialogShow from "components/dialog-show"
+import { useMount } from "utils"
+import { checkID, validatePhone } from "./util"
 import {
   playCardInputInvalid,
   playPhoneInputInvalid,
-} from "utils/androidJSBridge";
+} from "utils/androidJSBridge"
 export const NumberKeyBoardModal = ({
   title,
   type,
@@ -22,33 +22,33 @@ export const NumberKeyBoardModal = ({
   onConfirm,
   onResetTime,
 }: {
-  title: string;
-  type: typeName;
-  value: string;
-  keywordList: string[];
-  onClose: () => void;
-  onConfirm: (num: string) => void;
-  onResetTime: () => void;
+  title: string
+  type: typeName
+  value: string
+  keywordList: string[]
+  onClose: () => void
+  onConfirm: (num: string) => void
+  onResetTime: () => void
 }) => {
-  const [numberStr, setNumberStr] = useState(value);
+  const [numberStr, setNumberStr] = useState(value)
   useMount(
     useCallback(() => {
-      setNumberStr(value);
+      setNumberStr(value)
     }, [value])
-  );
+  )
   const handleClose = () => {
-    onResetTime();
-    setNumberStr(value);
-    onClose();
-  };
+    onResetTime()
+    setNumberStr(value)
+    onClose()
+  }
   const handleOk = () => {
-    onResetTime();
+    onResetTime()
     if (type === typeName.IDCard) {
       if (checkID(numberStr)) {
-        onConfirm(numberStr);
-        handleClose();
+        onConfirm(numberStr)
+        handleClose()
       } else {
-        playCardInputInvalid();
+        playCardInputInvalid()
         const handler = Dialog.show({
           content: (
             <DialogShow
@@ -56,14 +56,14 @@ export const NumberKeyBoardModal = ({
               close={() => handler.close()}
             />
           ),
-        });
+        })
       }
     } else {
       if (validatePhone(numberStr)) {
-        onConfirm(numberStr);
-        handleClose();
+        onConfirm(numberStr)
+        handleClose()
       } else {
-        playPhoneInputInvalid();
+        playPhoneInputInvalid()
         const handler = Dialog.show({
           content: (
             <DialogShow
@@ -71,32 +71,32 @@ export const NumberKeyBoardModal = ({
               close={() => handler.close()}
             />
           ),
-        });
+        })
       }
     }
-  };
+  }
   const handleClickButton = (e: any, num: string) => {
-    e.preventDefault();
-    onResetTime();
+    e.preventDefault()
+    onResetTime()
     if (num === "clear") {
-      handleClear();
+      handleClear()
     } else if (num === "delete") {
-      handleDelete();
+      handleDelete()
     } else {
       if (type === typeName.IDCard && numberStr.length < 18) {
-        setNumberStr(numberStr + num);
+        setNumberStr(numberStr + num)
       }
       if (type === typeName.Phone && numberStr.length < 11) {
-        setNumberStr(numberStr + num);
+        setNumberStr(numberStr + num)
       }
     }
-  };
+  }
   const handleDelete = () => {
-    setNumberStr(numberStr.slice(0, numberStr.length - 1));
-  };
+    setNumberStr(numberStr.slice(0, numberStr.length - 1))
+  }
   const handleClear = () => {
-    setNumberStr("");
-  };
+    setNumberStr("")
+  }
   return (
     <ModalBox className="number-key-board-modal">
       <div className="modal-header">
@@ -143,7 +143,7 @@ export const NumberKeyBoardModal = ({
                         )}
                       </Button>
                     </Grid.Item>
-                  );
+                  )
                 })}
               </Grid>
             </Grid.Item>
@@ -171,15 +171,15 @@ export const NumberKeyBoardModal = ({
         </div>
       </div>
     </ModalBox>
-  );
-};
+  )
+}
 const ModalBox = styled.div`
   width: 50vw;
   padding: 0vw 3vw 1vw;
-`;
+`
 const ModalTitle = styled.div`
   text-align: center;
   color: black;
   line-height: 6vh;
   font-size: 3.3vh;
-`;
+`

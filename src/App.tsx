@@ -1,14 +1,14 @@
-import React from "react";
-import "./App.css";
-import { useAuth } from "context/auth-context";
-import { ErrorBoundary } from "components/error-boundary";
-import { FullPageErrorFallback, FullPageLoading } from "components/lib";
-import AuthenticatedApp from "authenticated-app";
+import React from "react"
+import "./App.css"
+import { useAuth } from "context/auth-context"
+import { ErrorBoundary } from "components/error-boundary"
+import { FullPageErrorFallback, FullPageLoading } from "components/lib"
+import AuthenticatedApp from "authenticated-app"
 
-const UnauthenticatedApp = React.lazy(() => import("unauthenticated-app"));
+const UnauthenticatedApp = React.lazy(() => import("unauthenticated-app"))
 
 function App() {
-  const { user } = useAuth();
+  const { user } = useAuth()
   return (
     <div className="App">
       <ErrorBoundary fallbackRender={FullPageErrorFallback}>
@@ -17,7 +17,7 @@ function App() {
         </React.Suspense>
       </ErrorBoundary>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

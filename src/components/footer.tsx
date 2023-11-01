@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from "react"
+import styled from "@emotion/styled"
 
 export default function FooterText({ time }: { time: number }) {
   return (
     <FooterContentText className="footer-content-box">
       本页面将于<TimeStyle>{time}秒</TimeStyle>后返回首页
     </FooterContentText>
-  );
+  )
 }
 export const FooterContentText = styled.div`
   position: fixed;
@@ -17,7 +17,7 @@ export const FooterContentText = styled.div`
   color: #333;
   z-index: 1001;
   font-size: 2.15vh;
-`;
+`
 export const TimeStyle = styled.span`
   color: #ca7b3d;
-`;
+`

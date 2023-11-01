@@ -1,4 +1,4 @@
-const CracoLessPlugin = require("craco-less");
+const CracoLessPlugin = require("craco-less")
 
 module.exports = {
   //配置代理解决跨域
@@ -31,4 +31,4 @@ module.exports = {
       },
     },
   ],
-};
+}

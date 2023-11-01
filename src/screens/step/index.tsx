@@ -1,27 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDocumentTitle } from "utils";
-import { useNavigate } from "react-router-dom";
-import { AutoCenter, Dialog, Image, Modal } from "antd-mobile";
-import { CardContent, CardTitle, Title } from "components/lib";
-import styled from "@emotion/styled";
-import "./step.css";
-import peopleSrc from "assets/people.png";
-import { useHttp } from "utils/http";
-import {
-  checkID,
-  useChildTaskInUrl,
-  useInterval,
-  useParamInUrl,
-  validatePhone,
-} from "./util";
-import { StepProgress } from "./step-progress";
-import { IdCard } from "./id-card";
-import { PhoneInput } from "./phone-input";
-import { BtnList } from "./btn-list";
-import DialogShow from "components/dialog-show";
-import { NumberKeyBoardModal } from "./number-key-board-modal";
-import { typeName } from "types";
-import { useMachineStatus } from "utils/task";
+import React, { useEffect, useRef, useState } from "react"
+import { useDocumentTitle } from "utils"
+import { useNavigate } from "react-router-dom"
+import { AutoCenter, Dialog, Image, Modal } from "antd-mobile"
+import { CardContent, CardTitle, Title } from "components/lib"
+import styled from "@emotion/styled"
+import "./step.css"
+import peopleSrc from "assets/people.png"
+import { useHttp } from "utils/http"
+import { checkID, useChildTaskInUrl, useInterval, validatePhone } from "./util"
+import { StepProgress } from "./step-progress"
+import { IdCard } from "./id-card"
+import { PhoneInput } from "./phone-input"
+import { BtnList } from "./btn-list"
+import DialogShow from "components/dialog-show"
+import { NumberKeyBoardModal } from "./number-key-board-modal"
+import { typeName } from "types"
+import { useMachineStatus } from "utils/task"
 import {
   getUserCardId,
   playCardInput,
@@ -33,14 +27,14 @@ import {
   playTakeFail,
   playTakeSuccess,
   setPrint,
-} from "utils/androidJSBridge";
-import FooterText from "components/footer";
+} from "utils/androidJSBridge"
+import FooterText from "components/footer"
 
 export const StepScreen = () => {
-  const client = useHttp();
-  const navigate = useNavigate();
+  const client = useHttp()
+  const navigate = useNavigate()
 
-  const [takeType, setTakeType] = useState("1");
+  const [takeType, setTakeType] = useState("1")
   const [stepData, setStepData] = useState([
     {
       key: "idCard",
@@ -54,90 +48,90 @@ export const StepScreen = () => {
       key: "complete",
       name: "完成",
     },
-  ]);
+  ])
 
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [IDNumber, setIDNumber] = useState("");
-  const [userName, setUserName] = useState("");
-  const [stepKey, setStepKey] = useState(0);
-  const [idCardModalVisible, setIdCardModalVisible] = useState(false);
-  const [phoneModalVisible, setPhoneModalVisible] = useState(false);
-  const [num, setNum] = useState(120);
+  const [phoneNumber, setPhoneNumber] = useState("")
+  const [IDNumber, setIDNumber] = useState("")
+  const [userName, setUserName] = useState("")
+  const [stepKey, setStepKey] = useState(0)
+  const [idCardModalVisible, setIdCardModalVisible] = useState(false)
+  const [phoneModalVisible, setPhoneModalVisible] = useState(false)
+  const [num, setNum] = useState(120)
 
-  const ref = useRef<any>(null);
-  const refContent = useRef<any>(null);
-  const [isOverflow, setIsOverflow] = useState(false);
+  const ref = useRef<any>(null)
+  const refContent = useRef<any>(null)
+  const [isOverflow, setIsOverflow] = useState(false)
   const isOverflowFun = () => {
-    const width = ref.current?.offsetWidth || 0;
-    const contentWidth = refContent.current?.offsetWidth || 0;
+    const width = ref.current?.offsetWidth || 0
+    const contentWidth = refContent.current?.offsetWidth || 0
     if (contentWidth > width) {
-      refContent.current.style.animationDuration = contentWidth / 110 + "s";
-      return true;
+      refContent.current.style.animationDuration = contentWidth / 110 + "s"
+      return true
     }
-    return false;
-  };
+    return false
+  }
 
-  const { data: currentChildTask } = useChildTaskInUrl();
-  const { data: currentMachineStatus } = useMachineStatus();
+  const { data: currentChildTask } = useChildTaskInUrl()
+  const { data: currentMachineStatus } = useMachineStatus()
   useInterval(
     () => {
-      setNum(num - 1);
+      setNum(num - 1)
       if (num === 0) {
-        navigate("/");
+        navigate("/")
       }
     },
     num === -1 ? null : 1000
-  );
-  useDocumentTitle("取号管理系统", false);
+  )
+  useDocumentTitle("取号管理系统", false)
   useInterval(
     () => {
-      const res = getUserCardId();
-      if (!res) return;
+      const res = getUserCardId()
+      if (!res) return
       if (res.status) {
-        playCardSuccess();
-        setIDNumber(res.data.id);
-        setUserName(res.data.name || "");
-        setTakeType("1");
+        playCardSuccess()
+        setIDNumber(res.data.id)
+        setUserName(res.data.name || "")
+        setTakeType("1")
       } else {
       }
     },
     stepKey === 0 && !IDNumber && takeType === "1" ? 2000 : null
-  );
+  )
 
   const goBackPage = () => {
-    window.history.back();
-  };
+    window.history.back()
+  }
 
   const onResetTime = () => {
-    setNum(120);
-  };
+    setNum(120)
+  }
   // 上一步
   const handlePrevStep = () => {
     if (stepKey === 0) {
       if (IDNumber) {
         // 已有身份证信息，点击左侧的返回按钮
-        setIDNumber("");
-        setPhoneNumber("");
-        setTakeType("1");
-        setUserName("");
+        setIDNumber("")
+        setPhoneNumber("")
+        setTakeType("1")
+        setUserName("")
       } else {
         // 返回上一页
-        goBackPage();
+        goBackPage()
       }
     } else if (stepKey > 0 && stepKey < stepData.length - 1) {
-      setPhoneNumber("");
-      setStepKey(stepKey - 1);
+      setPhoneNumber("")
+      setStepKey(stepKey - 1)
     } else if (stepKey === stepData.length - 1) {
       // 取号成功点击返回首页
-      navigate("/");
+      navigate("/")
     }
-  };
+  }
 
   // 下一步
   const handleNextStep = () => {
     if (stepKey >= stepData.length - 1) {
-      navigate("/");
-      return;
+      navigate("/")
+      return
     }
     // 如果在身份证号码填写页则需要校验身份证号码
     if (stepKey === 0 && takeType !== "3") {
@@ -148,24 +142,24 @@ export const StepScreen = () => {
           method: "POST",
         })
           .then((res) => {
-            setPhoneNumber(res?.phoneNumber || "");
-            setUserName(res?.residentName || "");
+            setPhoneNumber(res?.phoneNumber || "")
+            setUserName(res?.residentName || "")
             if (!res?.phoneNumber) {
-              setPhoneModalVisible(true);
-              playPhoneInput();
+              setPhoneModalVisible(true)
+              playPhoneInput()
             } else {
-              setPhoneModalVisible(false);
+              setPhoneModalVisible(false)
             }
-            setStepKey(stepKey + 1);
+            setStepKey(stepKey + 1)
           })
           .catch((err) => {
-            playPhoneInput();
-            setPhoneModalVisible(true);
-            setStepKey(stepKey + 1);
-            console.log("err: ", err);
-          });
+            playPhoneInput()
+            setPhoneModalVisible(true)
+            setStepKey(stepKey + 1)
+            console.log("err: ", err)
+          })
       } else {
-        playCardInputInvalid();
+        playCardInputInvalid()
         const handler = Dialog.show({
           content: (
             <DialogShow
@@ -173,26 +167,26 @@ export const StepScreen = () => {
               close={() => handler.close()}
             />
           ),
-        });
+        })
       }
     } else {
-      setStepKey(stepKey + 1);
+      setStepKey(stepKey + 1)
     }
-  };
+  }
 
   //   手动输入
   const inputManually = () => {
-    playCardInput();
-    setIdCardModalVisible(true);
-  };
+    playCardInput()
+    setIdCardModalVisible(true)
+  }
 
   // 临时取号
   const quickGetNo = () => {
-    playPhoneInput();
-    setStepKey(1);
-    setTakeType("3");
-    setPhoneModalVisible(true);
-  };
+    playPhoneInput()
+    setStepKey(1)
+    setTakeType("3")
+    setPhoneModalVisible(true)
+  }
 
   // 取号
   const onGetFinalNo = () => {
@@ -203,22 +197,22 @@ export const StepScreen = () => {
         takeType: takeType,
         identityCardNum: IDNumber,
         phoneNumber: phoneNumber,
-      };
+      }
       client("getTakeNo", { data: params, method: "POST" })
         .then(async (takeRes) => {
           //播放取号成功语音 硬件接口
-          playTakeSuccess();
+          playTakeSuccess()
           //跳到取号已完成界面
-          setStepKey(stepKey + 1);
+          setStepKey(stepKey + 1)
           //调设备打印 硬件接口
-          const res = setPrint(takeRes);
+          const res = setPrint(takeRes)
           if (!res) {
             const handler = Dialog.show({
               content: (
                 <DialogShow content="机器故障" close={() => handler.close()} />
               ),
-            });
-            return;
+            })
+            return
           }
           //设备状态接口
           client("setPrintStatus", {
@@ -227,7 +221,7 @@ export const StepScreen = () => {
               takeNoId: currentMachineStatus?.takeNum,
             },
             method: "POST",
-          });
+          })
           if (res?.status) {
           } else {
             const handler = Dialog.show({
@@ -237,7 +231,7 @@ export const StepScreen = () => {
                   close={() => handler.close()}
                 />
               ),
-            });
+            })
           }
         })
         .catch((e) => {
@@ -245,13 +239,13 @@ export const StepScreen = () => {
             content: (
               <DialogShow content={e.message} close={() => handler.close()} />
             ),
-          });
+          })
           if (e.message.indexOf("无法取号") !== -1) {
-            playTakeFail();
+            playTakeFail()
           }
-        });
+        })
     } else {
-      playPhoneInputInvalid();
+      playPhoneInputInvalid()
       const handler = Dialog.show({
         content: (
           <DialogShow
@@ -259,55 +253,54 @@ export const StepScreen = () => {
             close={() => handler.close()}
           />
         ),
-      });
+      })
     }
-  };
+  }
 
   useEffect(() => {
     let timer = setTimeout(() => {
-      const flag = isOverflowFun();
-      setIsOverflow(flag);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+      const flag = isOverflowFun()
+      setIsOverflow(flag)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
-    console.log(1);
     //请放入身份证语音播报
-    playCardReady();
-  }, []);
+    playCardReady()
+  }, [])
 
   const handleIdCardConfirm = (num: string) => {
     setTimeout(() => {
-      setTakeType("2");
-    }, 1);
-    setIDNumber(num);
-  };
+      setTakeType("2")
+    }, 1)
+    setIDNumber(num)
+  }
 
   const handlePhoneEdit = () => {
-    onResetTime();
-    setPhoneModalVisible(true);
-  };
+    onResetTime()
+    setPhoneModalVisible(true)
+  }
   const handlePhoneClose = () => {
-    onResetTime();
-    setPhoneModalVisible(false);
+    onResetTime()
+    setPhoneModalVisible(false)
     if (!phoneNumber) {
-      setStepKey(0);
+      setStepKey(0)
       if (!IDNumber) {
-        setTakeType("1");
+        setTakeType("1")
       }
     }
-  };
+  }
   const handlePhoneConfirm = (num: string) => {
-    onResetTime();
+    onResetTime()
     if (num) {
       setTimeout(() => {
-        setStepKey(1);
-      }, 1);
-      setPhoneNumber(num);
-      setPhoneModalVisible(false);
+        setStepKey(1)
+      }, 1)
+      setPhoneNumber(num)
+      setPhoneModalVisible(false)
     }
-  };
+  }
   return (
     <>
       <CardTitle>
@@ -399,7 +392,7 @@ export const StepScreen = () => {
               "delete",
             ]}
             onClose={() => {
-              setIdCardModalVisible(false);
+              setIdCardModalVisible(false)
             }}
             onConfirm={handleIdCardConfirm}
             onResetTime={onResetTime}
@@ -438,8 +431,8 @@ export const StepScreen = () => {
       />
       <FooterText time={num} />
     </>
-  );
-};
+  )
+}
 
 const CardContentBox = styled(CardContent)`
   flex: 1;
@@ -448,7 +441,7 @@ const CardContentBox = styled(CardContent)`
   display: flex;
   flex-direction: column;
   padding: 2vh 4vh 1vh;
-`;
+`
 const ContentMain = styled.div`
   flex: 1;
   width: 100%;
@@ -456,7 +449,7 @@ const ContentMain = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
-`;
+`
 const CardContentFooter = styled(CardContent)`
   width: 100%;
   display: flex;
@@ -466,7 +459,7 @@ const CardContentFooter = styled(CardContent)`
   height: 100px;
   padding: 0 40px;
   margin-bottom: 2vh;
-`;
+`
 
 const TextBox = styled.div`
   display: flex;
@@ -477,4 +470,4 @@ const TextBox = styled.div`
   font-size: 3.3vh;
   font-weight: bold;
   white-space: nowrap;
-`;
+`

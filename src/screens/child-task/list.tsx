@@ -1,30 +1,30 @@
-import React, { useRef, useState } from "react";
-import { ChildTask } from "types/task";
-import { AutoCenter, Image, Grid, Swiper, SpinLoading } from "antd-mobile";
-import { SwiperRef } from "antd-mobile/es/components/swiper";
-import leftArrowSrc from "assets/left-arrow.png";
-import rightArrowSrc from "assets/right-arrow.png";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react"
+import { ChildTask } from "types/task"
+import { AutoCenter, Image, Grid, Swiper, SpinLoading } from "antd-mobile"
+import { SwiperRef } from "antd-mobile/es/components/swiper"
+import leftArrowSrc from "assets/left-arrow.png"
+import rightArrowSrc from "assets/right-arrow.png"
+import { Link } from "react-router-dom"
 interface ListProps {
-  tasks: ChildTask[];
-  loading: boolean;
+  tasks: ChildTask[]
+  loading: boolean
 }
 function getNewArr(arr: ChildTask[], n: number) {
-  let newArr = [];
+  let newArr = []
   for (let i = 0; i < arr.length; i += n) {
-    newArr.push(arr.slice(i, i + n));
+    newArr.push(arr.slice(i, i + n))
   }
-  return newArr;
+  return newArr
 }
 
 export const List = ({ tasks, loading }: ListProps) => {
-  const NewList = getNewArr(tasks, 6);
-  const ref = useRef<SwiperRef>(null);
-  const [currentSwiperIndex, setCurrentSwiperIndex] = useState(0);
+  const NewList = getNewArr(tasks, 6)
+  const ref = useRef<SwiperRef>(null)
+  const [currentSwiperIndex, setCurrentSwiperIndex] = useState(0)
 
   const onIndexChange = (index: number) => {
-    setCurrentSwiperIndex(index);
-  };
+    setCurrentSwiperIndex(index)
+  }
   const items = NewList.map((group, index) => (
     <Swiper.Item key={index}>
       <div className="task-content content">
@@ -39,12 +39,12 @@ export const List = ({ tasks, loading }: ListProps) => {
                   <AutoCenter>{task.businessName}</AutoCenter>
                 </Grid.Item>
               </Link>
-            );
+            )
           })}
         </Grid>
       </div>
     </Swiper.Item>
-  ));
+  ))
   const listItems = (
     <>
       {items.length > 1 ? (
@@ -71,7 +71,7 @@ export const List = ({ tasks, loading }: ListProps) => {
         <div
           className="arrow-left"
           onClick={() => {
-            ref.current?.swipePrev();
+            ref.current?.swipePrev()
           }}
         >
           <Image
@@ -86,7 +86,7 @@ export const List = ({ tasks, loading }: ListProps) => {
         <div
           className="arrow-right"
           onClick={() => {
-            ref.current?.swipeNext();
+            ref.current?.swipeNext()
           }}
         >
           <Image
@@ -98,6 +98,6 @@ export const List = ({ tasks, loading }: ListProps) => {
         </div>
       )}
     </>
-  );
-  return <>{loading ? <SpinLoading /> : listItems}</>;
-};
+  )
+  return <>{loading ? <SpinLoading /> : listItems}</>
+}

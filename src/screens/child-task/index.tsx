@@ -1,39 +1,39 @@
-import React, { useState } from "react";
-import { useDocumentTitle } from "utils";
-import { CardContent, CardTitle, Title } from "components/lib";
-import { Button, Image, Grid, AutoCenter } from "antd-mobile";
-import { List } from "screens/child-task/list";
-import "./task.css";
-import styled from "@emotion/styled";
-import prevStepSrc from "assets/prev-step.png";
-import homeSrc from "assets/home.png";
-import { useTaskInUrl } from "./util";
-import { useNavigate } from "react-router-dom";
-import FooterText from "components/footer";
-import { useInterval } from "screens/step/util";
+import React, { useState } from "react"
+import { useDocumentTitle } from "utils"
+import { CardContent, CardTitle, Title } from "components/lib"
+import { Button, Image, Grid, AutoCenter } from "antd-mobile"
+import { List } from "screens/child-task/list"
+import "./task.css"
+import styled from "@emotion/styled"
+import prevStepSrc from "assets/prev-step.png"
+import homeSrc from "assets/home.png"
+import { useTaskInUrl } from "./util"
+import { useNavigate } from "react-router-dom"
+import FooterText from "components/footer"
+import { useInterval } from "screens/step/util"
 
 export const ChildTasksScreen = () => {
-  const { data: currentTask, isLoading } = useTaskInUrl();
-  const { kindName, businessList } = { ...currentTask };
-  useDocumentTitle("取号管理系统", false);
+  const { data: currentTask, isLoading } = useTaskInUrl()
+  const { kindName, businessList } = { ...currentTask }
+  useDocumentTitle("取号管理系统", false)
   const goBackPage = () => {
-    window.history.back();
-  };
-  const navigate = useNavigate();
+    window.history.back()
+  }
+  const navigate = useNavigate()
   const goHomePage = () => {
     // 点击返回首页
-    navigate("/");
-  };
-  const [num, setNum] = useState(120);
+    navigate("/")
+  }
+  const [num, setNum] = useState(120)
   useInterval(
     () => {
-      setNum(num - 1);
+      setNum(num - 1)
       if (num === 0) {
-        goHomePage();
+        goHomePage()
       }
     },
     num === -1 ? null : 1000
-  );
+  )
   return (
     <div className="child-task">
       <CardTitle>
@@ -78,14 +78,14 @@ export const ChildTasksScreen = () => {
       </CardContentFooter>
       <FooterText time={num} />
     </div>
-  );
-};
+  )
+}
 const CardContentBox = styled(CardContent)`
   flex: 1;
   position: relative;
   justify-content: center;
   padding-top: 4vh;
-`;
+`
 const CardContentFooter = styled(CardContent)`
   width: 100%;
   display: flex;
@@ -96,4 +96,4 @@ const CardContentFooter = styled(CardContent)`
   padding: 0 40px;
   margin-bottom: 2vh;
   align-items: start;
-`;
+`

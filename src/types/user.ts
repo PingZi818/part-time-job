@@ -1,6 +1,6 @@
 export interface User {
-  communityName: string;
-  userName: string;
-  machineName: string;
-  userToken: string;
+  communityName: string
+  userName: string
+  machineName: string
+  userToken: string
 }

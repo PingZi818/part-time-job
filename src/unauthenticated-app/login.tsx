@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-import React, { useState } from "react";
-import { useAuth } from "context/auth-context";
-import { Button, Dialog, Form, Input } from "antd-mobile";
-import userImg from "assets/user.png";
-import lockImg from "assets/lock.png";
-import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
-import { useAsync } from "utils/use-async";
-import "./login.css";
-import styled from "@emotion/styled";
-import DialogShow from "components/dialog-show";
+import { jsx, css } from "@emotion/react"
+import React, { useState } from "react"
+import { useAuth } from "context/auth-context"
+import { Button, Dialog, Form, Input } from "antd-mobile"
+import userImg from "assets/user.png"
+import lockImg from "assets/lock.png"
+import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons"
+import { useAsync } from "utils/use-async"
+import "./login.css"
+import styled from "@emotion/styled"
+import DialogShow from "components/dialog-show"
 const eye = css`
   padding: 4px;
   cursor: pointer;
@@ -17,34 +17,34 @@ const eye = css`
     display: block;
     font-size: var(--adm-font-size-7);
   }
-`;
+`
 export const LoginScreen = ({
   onError,
 }: {
-  onError: (error: Error) => void;
+  onError: (error: Error) => void
 }) => {
-  type FieldType = { userName: string; userPassword: string };
-  const [form] = Form.useForm<FieldType>();
-  const userName = Form.useWatch("userName", form);
-  const userPassword = Form.useWatch("userPassword", form);
-  const { login } = useAuth();
-  const { run, isLoading } = useAsync(undefined, { throwOnError: true });
-  const [visible, setVisible] = useState(false);
+  type FieldType = { userName: string; userPassword: string }
+  const [form] = Form.useForm<FieldType>()
+  const userName = Form.useWatch("userName", form)
+  const userPassword = Form.useWatch("userPassword", form)
+  const { login } = useAuth()
+  const { run, isLoading } = useAsync(undefined, { throwOnError: true })
+  const [visible, setVisible] = useState(false)
   // HTMLFormElement extends Element
   const handleSubmit = async (values: {
-    userName: string;
-    userPassword: string;
+    userName: string
+    userPassword: string
   }) => {
     try {
-      await run(login(values));
+      await run(login(values))
     } catch (e: any) {
       const handler = Dialog.show({
         content: (
           <DialogShow content={e.message} close={() => handler.close()} />
         ),
-      });
+      })
     }
-  };
+  }
 
   return (
     <div className="form-box">
@@ -98,8 +98,8 @@ export const LoginScreen = ({
         </LoginButton>
       </Form>
     </div>
-  );
-};
+  )
+}
 
 export const LoginButton = styled(Button)`
   position: absolute !important;
@@ -110,4 +110,4 @@ export const LoginButton = styled(Button)`
   background: #61b4c6 !important;
   font-size: 3vh !important;
   border: none !important;
-`;
+`

@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
-import { AuthProvider } from "context/auth-context";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { HashRouter as Router } from "react-router-dom";
+import React, { ReactNode } from "react"
+import { AuthProvider } from "context/auth-context"
+import { QueryClient, QueryClientProvider } from "react-query"
+import { HashRouter as Router } from "react-router-dom"
 
 export const AppProviders = ({ children }: { children: ReactNode }) => {
   const queryClient = new QueryClient({
@@ -10,7 +10,7 @@ export const AppProviders = ({ children }: { children: ReactNode }) => {
         refetchOnWindowFocus: false,
       },
     },
-  });
+  })
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -18,5 +18,5 @@ export const AppProviders = ({ children }: { children: ReactNode }) => {
         <AuthProvider>{children}</AuthProvider>
       </Router>
     </QueryClientProvider>
-  );
-};
+  )
+}

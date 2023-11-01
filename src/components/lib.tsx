@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import React from "react";
-import zhCN from "antd-mobile/es/locales/zh-CN";
+import styled from "@emotion/styled"
+import React from "react"
+import zhCN from "antd-mobile/es/locales/zh-CN"
 import {
   Button,
   Card,
@@ -8,13 +8,13 @@ import {
   ErrorBlock,
   ConfigProvider,
   SpinLoading,
-} from "antd-mobile";
-import loginLogo from "assets/login-logo.png";
-import loginContentBg from "assets/login-content.png";
+} from "antd-mobile"
+import loginLogo from "assets/login-logo.png"
+import loginContentBg from "assets/login-content.png"
 export const Row = styled.div<{
-  gap?: number | boolean;
-  between?: boolean;
-  marginBottom?: number;
+  gap?: number | boolean
+  between?: boolean
+  marginBottom?: number
 }>`
   display: flex;
   align-items: center;
@@ -31,29 +31,29 @@ export const Row = styled.div<{
         ? "2rem"
         : undefined};
   }
-`;
+`
 
 const FullPage = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
 export const FullPageLoading = () => (
   <FullPage>
     <SpinLoading />
   </FullPage>
-);
+)
 
 export const FullPageErrorFallback = ({ error }: { error: Error | null }) => (
   <FullPage>
     <ErrorBox error={error} />
   </FullPage>
-);
+)
 
 // 类型守卫
-const isError = (value: any): value is Error => value?.message;
+const isError = (value: any): value is Error => value?.message
 
 export const ErrorBox = ({ error }: { error: unknown }) => {
   if (isError(error)) {
@@ -62,14 +62,14 @@ export const ErrorBox = ({ error }: { error: unknown }) => {
         {/* <ErrorBlock status='disconnected' /> */}
         {error}
       </ConfigProvider>
-    );
+    )
   }
-  return null;
-};
+  return null
+}
 
 export const ButtonNoPadding = styled(Button)`
   padding: 0;
-`;
+`
 
 export const Title = styled.div`
   padding: 1.5rem 0;
@@ -79,14 +79,14 @@ export const Title = styled.div`
   overflow: hidden;
   white-space: nowrap;
   margin-right: 10px;
-`;
+`
 export const LogoTitle = styled.div`
   color: #fff;
   font-size: 4.4vh;
   line-height: 4.4vh;
   font-weight: bold;
   height: 4.8vh;
-`;
+`
 export const UserNameBox = styled.div`
   color: #fff;
   font-size: 4.4vh;
@@ -94,7 +94,7 @@ export const UserNameBox = styled.div`
   font-weight: bold;
   height: 4.8vh;
   float: left;
-`;
+`
 export const CardTitle = styled.div`
   padding: 0 4rem;
   position: relative;
@@ -103,21 +103,21 @@ export const CardTitle = styled.div`
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-`;
+`
 export const CardContent = styled.div`
   display: flex;
   text-align: center;
   display: flex;
   align-items: center;
   height: 100%;
-`;
+`
 export const LoginLogoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   text-align: left;
-`;
+`
 
 export const ImgBox = styled.div`
   width: 42vh;
@@ -127,7 +127,7 @@ export const ImgBox = styled.div`
   margin-right: 1rem;
   background: url(${loginLogo}) no-repeat center;
   background-size: contain;
-`;
+`
 
 export const ShadowCard = styled(Card)`
   width: 83vw;
@@ -143,4 +143,4 @@ export const ShadowCard = styled(Card)`
   text-align: center;
   background: url(${loginContentBg}) no-repeat center;
   background-size: cover;
-`;
+`
