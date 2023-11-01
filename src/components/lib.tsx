@@ -87,6 +87,14 @@ export const LogoTitle = styled.div`
   font-weight: bold;
   height: 4.8vh;
 `;
+export const UserNameBox = styled.div`
+  color: #fff;
+  font-size: 4.4vh;
+  line-height: 4.4vh;
+  font-weight: bold;
+  height: 4.8vh;
+  float: left;
+`;
 export const CardTitle = styled.div`
   padding: 0 4rem;
   position: relative;
@@ -112,7 +120,7 @@ export const LoginLogoBox = styled.div`
 `;
 
 export const ImgBox = styled.div`
-  width: 45.4rem;
+  width: 42vh;
   display: inline-block;
   height: 7vh;
   margin-left: 4vw;

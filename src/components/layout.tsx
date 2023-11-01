@@ -5,7 +5,13 @@ import exitBgSrc from "assets/exit.png";
 import { Button, Image } from "antd-mobile";
 import { useAuth } from "context/auth-context";
 import * as auth from "auth-provider";
-import { ImgBox, LoginLogoBox, LogoTitle, ShadowCard } from "./lib";
+import {
+  ImgBox,
+  LoginLogoBox,
+  LogoTitle,
+  ShadowCard,
+  UserNameBox,
+} from "./lib";
 export default function LayoutBox(props: any) {
   const { user } = useAuth();
   const exitLogin = async () => {
@@ -20,16 +26,21 @@ export default function LayoutBox(props: any) {
           <ImgBox />
           <LogoTitle>{user?.communityName}</LogoTitle>
         </LeftLoginBox>
-        <ExitContainer>
-          <LogoTitle>{user?.userName || ""}</LogoTitle>
-          <Image
-            className="exit-icon"
-            onClick={() => exitLogin()}
-            src={exitBgSrc}
-            height={"4vh"}
-            fit="contain"
-          />
-        </ExitContainer>
+        {user ? (
+          <ExitContainer>
+            <UserNameBox>{user?.userName || ""}</UserNameBox>
+            <Image
+              className="exit-icon"
+              onClick={() => exitLogin()}
+              src={exitBgSrc}
+              height={"4vh"}
+              width={"4vh"}
+              fit="contain"
+            />
+          </ExitContainer>
+        ) : (
+          ""
+        )}
       </LoginLogoBox>
       <ShadowCard
         bodyStyle={{
@@ -61,10 +72,6 @@ const LeftLoginBox = styled.div`
 `;
 const ExitContainer = styled.div`
   position: relative;
-  display: flex;
-  justify-content: end;
   right: 3vw;
-  margin-left: 4vw;
-  margin-right: 1rem;
-  align-items: center;
+  overflow: hidden;
 `;

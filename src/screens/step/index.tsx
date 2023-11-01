@@ -7,7 +7,13 @@ import styled from "@emotion/styled";
 import "./step.css";
 import peopleSrc from "assets/people.png";
 import { useHttp } from "utils/http";
-import { checkID, useChildTaskInUrl, useInterval, validatePhone } from "./util";
+import {
+  checkID,
+  useChildTaskInUrl,
+  useInterval,
+  useParamInUrl,
+  validatePhone,
+} from "./util";
 import { StepProgress } from "./step-progress";
 import { IdCard } from "./id-card";
 import { PhoneInput } from "./phone-input";
@@ -90,12 +96,12 @@ export const StepScreen = () => {
       if (res.status) {
         playCardSuccess();
         setIDNumber(res.data.id);
-        setTakeType("1");
         setUserName(res.data.name || "");
+        setTakeType("1");
       } else {
       }
     },
-    stepKey === 0 && !IDNumber && takeType === "1" ? 1000 : null
+    stepKey === 0 && !IDNumber && takeType === "1" ? 2000 : null
   );
 
   const goBackPage = () => {
@@ -176,16 +182,16 @@ export const StepScreen = () => {
 
   //   手动输入
   const inputManually = () => {
-    setIdCardModalVisible(true);
     playCardInput();
+    setIdCardModalVisible(true);
   };
 
   // 临时取号
   const quickGetNo = () => {
+    playPhoneInput();
     setStepKey(1);
     setTakeType("3");
     setPhoneModalVisible(true);
-    playPhoneInput();
   };
 
   // 取号
@@ -200,8 +206,11 @@ export const StepScreen = () => {
       };
       client("getTakeNo", { data: params, method: "POST" })
         .then(async (takeRes) => {
+          //播放取号成功语音 硬件接口
           playTakeSuccess();
+          //跳到取号已完成界面
           setStepKey(stepKey + 1);
+          //调设备打印 硬件接口
           const res = setPrint(takeRes);
           if (!res) {
             const handler = Dialog.show({
@@ -211,6 +220,7 @@ export const StepScreen = () => {
             });
             return;
           }
+          //设备状态接口
           client("setPrintStatus", {
             data: {
               isPrinted: res?.status,
@@ -231,14 +241,14 @@ export const StepScreen = () => {
           }
         })
         .catch((e) => {
-          if (e.message.indexOf("无法取号") !== -1) {
-            playTakeFail();
-          }
           const handler = Dialog.show({
             content: (
               <DialogShow content={e.message} close={() => handler.close()} />
             ),
           });
+          if (e.message.indexOf("无法取号") !== -1) {
+            playTakeFail();
+          }
         });
     } else {
       playPhoneInputInvalid();
@@ -254,13 +264,18 @@ export const StepScreen = () => {
   };
 
   useEffect(() => {
-    const flag = isOverflowFun();
-    setIsOverflow(flag);
-    return () => setIsOverflow(false);
-  }, [currentChildTask?.businessName]);
+    let timer = setTimeout(() => {
+      const flag = isOverflowFun();
+      setIsOverflow(flag);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  //请放入身份证语音播报
-  playCardReady();
+  useEffect(() => {
+    console.log(1);
+    //请放入身份证语音播报
+    playCardReady();
+  }, []);
 
   const handleIdCardConfirm = (num: string) => {
     setTimeout(() => {
@@ -361,8 +376,7 @@ export const StepScreen = () => {
       <Modal
         visible={idCardModalVisible}
         maskStyle={{
-          backdropFilter: "blur(8px)",
-          background: "rgba(0, 0, 0, 0)",
+          background: "rgba(255, 255, 255, 0.5)",
         }}
         bodyClassName="number-key-board-content"
         content={
@@ -395,8 +409,7 @@ export const StepScreen = () => {
       <Modal
         visible={phoneModalVisible}
         maskStyle={{
-          backdropFilter: "blur(8px)",
-          background: "rgba(0, 0, 0, 0)",
+          background: "rgba(255, 255, 255, 0.5)",
         }}
         bodyClassName="number-key-board-content"
         content={
@@ -461,7 +474,7 @@ const TextBox = styled.div`
   justify-content: center;
   padding: 1.5rem 0;
   color: #75c4cb;
-  font-size: 36px;
+  font-size: 3.3vh;
   font-weight: bold;
   white-space: nowrap;
 `;

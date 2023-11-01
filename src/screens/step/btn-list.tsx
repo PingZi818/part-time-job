@@ -120,21 +120,17 @@ export const BtnList = ({
             color="primary"
             onClick={goNextStep}
           >
-            <Grid columns={4} gap={8}>
-              <Grid.Item span={3}>
-                <div className="font-size-28">下一步</div>
-              </Grid.Item>
-              <Grid.Item>
-                <AutoCenter>
-                  <Image
-                    src={nextStepSrc}
-                    width={"2vw"}
-                    height={"4vh"}
-                    fit="contain"
-                  />
-                </AutoCenter>
-              </Grid.Item>
-            </Grid>
+            <div className="btn-with-icon">
+              <div className="btn-text">下一步</div>
+              <AutoCenter>
+                <Image
+                  src={nextStepSrc}
+                  width={"2vw"}
+                  height={"4vh"}
+                  fit="contain"
+                />
+              </AutoCenter>
+            </div>
           </Button>
         )}
         {stepData[stepKey].key === "phone" && (

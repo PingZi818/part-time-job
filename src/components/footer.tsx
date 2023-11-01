@@ -16,6 +16,7 @@ export const FooterContentText = styled.div`
   text-align: center;
   color: #333;
   z-index: 1001;
+  font-size: 2.15vh;
 `;
 export const TimeStyle = styled.span`
   color: #ca7b3d;

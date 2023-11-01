@@ -181,5 +181,5 @@ const ModalTitle = styled.div`
   text-align: center;
   color: black;
   line-height: 6vh;
-  font-size: 36px;
+  font-size: 3.3vh;
 `;

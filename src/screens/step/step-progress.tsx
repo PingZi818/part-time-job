@@ -40,26 +40,26 @@ const StepItemBox = styled.div`
 const StepNameItem = styled(AutoCenter)`
   position: relative;
   background: #d4d4d4;
-  font-size: 3rem;
+  font-size: 2.8vh;
   font-weight: bold;
-  height: 60px;
-  padding: 1rem 36px;
+  height: 5.6vh;
+  padding: 1rem 3.3vh;
   color: #959595;
   justify-content: center;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 2.8vh;
   width: 18vw;
 `;
 const CircleItem = styled(AutoCenter)`
   position: absolute;
-  width: 56px;
-  height: 56px;
+  width: 5.2vh;
+  height: 5.2vh;
   z-index: 1;
   left: 0;
   border-radius: 50%;
   background: #d4d4d4;
   color: #959595;
-  font-size: 3rem;
+  font-size: 2.8vh;
   font-weight: bold;
   justify-content: center;
   align-items: center;

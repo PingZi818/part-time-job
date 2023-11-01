@@ -74,7 +74,12 @@ export const List = ({ tasks, loading }: ListProps) => {
             ref.current?.swipePrev();
           }}
         >
-          <Image src={leftArrowSrc} width={100} height={100} fit="contain" />
+          <Image
+            src={leftArrowSrc}
+            width={"9.3vh"}
+            height={"9.3vh"}
+            fit="contain"
+          />
         </div>
       )}
       {currentSwiperIndex < NewList.length - 1 && (
@@ -84,7 +89,12 @@ export const List = ({ tasks, loading }: ListProps) => {
             ref.current?.swipeNext();
           }}
         >
-          <Image src={rightArrowSrc} width={100} height={100} fit="contain" />
+          <Image
+            src={rightArrowSrc}
+            width={"9.3vh"}
+            height={"9.3vh"}
+            fit="contain"
+          />
         </div>
       )}
     </>

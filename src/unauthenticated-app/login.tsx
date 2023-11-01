@@ -23,6 +23,10 @@ export const LoginScreen = ({
 }: {
   onError: (error: Error) => void;
 }) => {
+  type FieldType = { userName: string; userPassword: string };
+  const [form] = Form.useForm<FieldType>();
+  const userName = Form.useWatch("userName", form);
+  const userPassword = Form.useWatch("userPassword", form);
   const { login } = useAuth();
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
   const [visible, setVisible] = useState(false);
@@ -44,7 +48,7 @@ export const LoginScreen = ({
 
   return (
     <div className="form-box">
-      <Form layout="horizontal" onFinish={handleSubmit}>
+      <Form form={form} layout="horizontal" onFinish={handleSubmit}>
         <Form.Item
           label={<img className="user-icon" alt="user" src={userImg} />}
           name={"userName"}
@@ -84,7 +88,12 @@ export const LoginScreen = ({
             clearable
           />
         </Form.Item>
-        <LoginButton loading={isLoading} type={"submit"} color={"primary"}>
+        <LoginButton
+          loading={isLoading}
+          type={"submit"}
+          color={"primary"}
+          disabled={!userName || !userPassword}
+        >
           登录系统
         </LoginButton>
       </Form>
