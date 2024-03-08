@@ -1,0 +1,7 @@
+.carousel-box {
+  width: calc(100% - 0px);
+  background: #fff;
+  border: 1px solid;
+  margin-top: -1px;
+  height: 320px;
+}

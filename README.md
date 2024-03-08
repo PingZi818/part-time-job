@@ -1,31 +1,74 @@
-# Getting Started with Create React App
+English | [简体中文](./README.zh-CN.md)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Env and dependencies
 
-## Available Scripts
+- node
+- yarn
+- webpack
+- eslint
+- @vue/cli
+- [ant-design-vue@1.x](https://github.com/vueComponent/ant-design-vue) - Ant Design Of Vue
+- [vue-cropper](https://github.com/xyxiao001/vue-cropper) - Picture edit
+- [@antv/g2](https://antv.alipay.com/zh-cn/index.html) - AntV G2
+- [Viser-vue](https://viserjs.github.io/docs.html#/viser/guide/installation) - Antv/G2 of Vue
 
-In the project directory, you can run:
+> Note: [Yarn](https://yarnpkg.com/) package management is recommended, the exact same version loaded with the demo site of this project (yarn.lock) . but you can also use npm
 
-### `npm start` or `yarn start`
+### Project setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Clone repo
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+git clone project-git-url
+cd project-name
+```
 
-### `npm run build` or `yarn build`
+- Install dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+yarn install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Compiles and hot-reloads for development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+yarn run serve
+```
 
-## Learn More
+- Compiles and minifies for production
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+yarn run build
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Lints and fixes files
+
+```
+yarn run lint
+```
+
+### Other
+
+- **IMPORTANT : Issue feedback !! when opening Issue read [Issue / PR Contributing](https://github.com/vueComponent/ant-design-vue-pro/issues/90)**
+
+- [Vue-cli3](https://cli.vuejs.org/guide/) used by the project.
+
+- Disable Eslint (not recommended): remove `eslintConfig` field in `package.json` and `vue.config.js` field `lintOnSave: false`
+
+- Load on Demand `/src/main.js` L14, in `import './core/lazy_use'`, `import './core/use''`. more [load-on-demand.md](./docs/load-on-demand.md)
+
+- Customize Theme: [Custom Theme Config (@kokoroli)](https://github.com/kokoroli/antd-awesome/blob/master/docs/Ant_Design_%E6%A0%B7%E5%BC%8F%E8%A6%86%E7%9B%96.md)
+
+- I18n: [locales (@musnow)](./src/locales/index.js)
+
+- Production env `mock` is disabled. use `src/mock/index.js`
+
+- pls use `release` version
+
+## Browsers support
+
+Modern browsers and IE10.
+
+## Contributors
+
+This project exists thanks to all the people who contribute.
