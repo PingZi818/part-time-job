@@ -1,0 +1,63 @@
+.process-list {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.process-item-container {
+  display: flex;
+}
+.process-list .process-item {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.process-list .process-item .process-dot {
+  width: 88px;
+  height: 88px;
+  background: #e0e5f0;
+  border-radius: 50%;
+}
+.process-list .process-item .process-dot::after {
+  position: absolute;
+  display: block;
+  left: calc(calc(100% - 88px) / 2 + 88px);
+  top: 44px;
+  content: "";
+  width: calc(100% - 88px);
+  height: 1px;
+  background: #f2f3f5;
+}
+.process-list .process-item .process-dot.no-line::after {
+  display: none;
+}
+.process-list .process-item .process-description {
+  padding: 0 20px;
+}
+.process-list .process-item .process-description p {
+  text-align: center;
+}
+.process-list .process-item .process-description span {
+  text-align: center;
+  font-weight: 500;
+  font-size: 11px;
+  color: #8b8b8b;
+  line-height: 12px;
+}
+.process-list .process-item .process-description p.step-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: #060a10;
+  line-height: 30px;
+  margin-top: 30px;
+}
+.process-list .process-item .process-description p.time-coverage {
+  text-align: center;
+  font-weight: 500;
+  font-size: 11px;
+  color: #8b8b8b;
+  line-height: 12px;
+}

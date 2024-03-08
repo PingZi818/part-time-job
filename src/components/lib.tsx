@@ -70,7 +70,7 @@ export const TitleBox = ({ name }: { name: string }) => {
   if (name) {
     return (
       <TitleB>
-        <LeftLine></LeftLine>
+        {/* <LeftLine></LeftLine> */}
         <TitleText>{name}</TitleText>
       </TitleB>
     )
@@ -78,7 +78,7 @@ export const TitleBox = ({ name }: { name: string }) => {
   return null
 }
 export const TitleB = styled.div`
-  border-bottom: 1px solid #eef3fa;
+  // border-bottom: 1px solid #eef3fa;
   margin-bottom: 20px;
   overflow: hidden;
 `
@@ -91,12 +91,11 @@ export const LeftLine = styled.div`
 `
 export const TitleText = styled.span`
   float: left;
-  font-size: 16px;
-  color: #333;
-  line-height: 32px;
-  padding: 0 0 10px 20px;
-  font-weight: bold;
-  font-size: 22px;
+  padding: 0 0 10px 0px;
+  font-weight: 500;
+  font-size: 23px;
+  color: #060a10;
+  line-height: 18px;
 `
 export const ButtonNoPadding = styled(Button)`
   padding: 0;

@@ -15,7 +15,7 @@ function App() {
       theme={{
         token: {
           // Seed Token，影响范围大
-          colorPrimary: "#21468C",
+          colorPrimary: "#386BCC",
           borderRadius: 2,
           fontSize: 16,
           // 派生变量，影响范围小
@@ -23,18 +23,22 @@ function App() {
         },
         components: {
           Layout: {
-            headerBg: "#21468C",
-            footerBg: "#21468C",
+            headerBg: "#386BCC",
+            footerBg: "#242A37",
           },
           Menu: {
-            darkItemBg: "#21468C",
+            activeBarHeight: 64,
+            activeBarBorderWidth: 3,
+            groupTitleLineHeight: 64,
+            itemHeight: 64,
+            darkItemBg: "#386BCC",
           },
           Button: {
-            colorPrimary: "#21468C",
+            colorPrimary: "#386BCC",
             algorithm: true, // 启用算法
           },
           Input: {
-            colorPrimary: "#eb2f96",
+            colorPrimary: "#386BCC",
             algorithm: true, // 启用算法
           },
         },

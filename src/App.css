@@ -79,6 +79,32 @@ html body #root .App {
   z-index: 2;
 }
 .ant-menu-item {
-  padding-inline: 0 !important;
-  padding-right: 140px !important;
+  width: 162px;
+  padding: 22px 0;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ant-menu-item.ant-menu-item-selected {
+  border-bottom: 3px solid #fff;
+}
+.demo-logo-content {
+  width: 1200px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.demo-logo-content .logo-text {
+  font-weight: 400;
+  font-size: 23px;
+  color: #141111;
+}
+.demo-logo-content .date-text {
+  font-weight: 400;
+  font-size: 15px;
+  color: #060a10;
+  line-height: 30px;
 }

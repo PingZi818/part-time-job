@@ -1,0 +1,32 @@
+.carousel-box {
+  width: calc(100% - 0px);
+  background: #ccc;
+  border: 1px solid;
+  height: 320px;
+}
+.carousel-box .ant-carousel .slick-dots-bottom {
+  bottom: 84px;
+}
+.carousel-box .ant-carousel .slick-dots li {
+  width: fit-content;
+  height: fit-content;
+}
+.carousel-box .ant-carousel .slick-dots li button {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 1;
+}
+.carousel-box .ant-carousel .slick-dots li.slick-active button {
+  width: 55px;
+  height: 16px;
+  background: #386bcc;
+  border-radius: 8px;
+}
+.carousel-box .ant-carousel .slick-dots li.slick-active {
+  width: 55px;
+  height: 16px;
+  background: #386bcc;
+  border-radius: 8px;
+}

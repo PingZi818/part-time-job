@@ -34,6 +34,12 @@ export default function LayoutBox(props: any) {
   }, [location])
   return (
     <LayoutContainer>
+      <LayoutHeaderTop>
+        <div className="demo-logo-content">
+          <p className="logo-text">YOUR LOGO</p>
+          <p className="date-text">2024年2月1日 星期四</p>
+        </div>
+      </LayoutHeaderTop>
       <Header
         style={{
           position: "sticky",
@@ -44,8 +50,8 @@ export default function LayoutBox(props: any) {
           alignItems: "center",
         }}
       >
-        <div className="demo-logo" />
         <Menu
+          className="menu-box-container"
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={["/home"]}
@@ -56,7 +62,9 @@ export default function LayoutBox(props: any) {
             margin: "auto",
             width: "1200px",
             minWidth: 0,
+            height: "100%",
             justifyContent: "left",
+            alignItems: "center",
           }}
         />
       </Header>
@@ -71,7 +79,17 @@ export default function LayoutBox(props: any) {
           {props.content}
         </div>
       </LayoutContent>
-      <Footer style={{ textAlign: "center", height: "100px", color: "#fff" }}>
+      <Footer
+        style={{
+          textAlign: "center",
+          height: "120px",
+          padding: "40px",
+          fontWeight: "400",
+          fontSize: "14px",
+          color: "#EAEAEA",
+          lineHeight: "23px",
+        }}
+      >
         <p>
           版权所有:苏州市工业和信息化局 主办单位:苏州市工业和信息化局
           承办单位:XXXX
@@ -82,9 +100,13 @@ export default function LayoutBox(props: any) {
   )
 }
 const LayoutContent = styled(Content)`
-  height: calc(100% - 200px);
+  height: calc(100% - 293px);
   overflow: auto;
-  background: #f7f9fc;
+  background: #f2f3f5;
+`
+const LayoutHeaderTop = styled.div`
+  width: 100%;
+  background: #f2f3f5;
 `
 const LayoutContainer = styled(Layout)`
   display: flex;

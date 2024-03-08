@@ -1,0 +1,64 @@
+.account-box {
+  width: 30%;
+}
+.account-box .account-box-list {
+  box-shadow: 0px 4px 15px 1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e3e3e3;
+  padding: 40px 20px;
+  background: #f2f3f5;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.account-box .account-box-list .account-item {
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 64px;
+  gap: 15px;
+}
+.account-box .account-box-list .account-item .account-content-box {
+  flex: 1;
+  font-weight: 400;
+  font-size: 11px;
+  color: #747474;
+  line-height: 18px;
+}
+.account-box .account-box-list .account-item .account-title-inner {
+  font-weight: 500;
+  font-size: 14px;
+  color: #060a10;
+  line-height: 30px;
+}
+.account-box .account-box-list .account-item .account-content-inner {
+  height: 40px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #747474;
+  line-height: 18px;
+}
+
+.account-box .account-box-list .account-item .dot-inner-box {
+  margin-top: 10px;
+  display: inline-block;
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid #0772ed;
+  background: rgba(7, 114, 237, 0);
+}
+.account-box .account-box-list .account-item .dot-inner-box::after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #0772ed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

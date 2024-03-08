@@ -1,0 +1,18 @@
+.product-list .product-item .product-item-box {
+  border: 1px solid #e3e3e3;
+  background: #f2f3f5;
+  box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.06);
+}
+.product-list .product-item .product-item-box .img-box {
+  height: 185px;
+  background: #818181;
+  border: solid 1px #818181;
+}
+.product-list .product-item .product-item-box .title-text {
+  padding: 10px;
+  text-align: center;
+  background: #f2f3f5;
+  font-weight: 500;
+  font-size: 14px;
+  color: #060a10;
+}

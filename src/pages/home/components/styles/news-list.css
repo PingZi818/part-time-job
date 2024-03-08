@@ -1,0 +1,57 @@
+.news-box {
+  flex: 1;
+}
+.news-box .news-box-list {
+  box-shadow: 0px 4px 15px 1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e3e3e3;
+  padding: 40px 20px;
+  background: #f2f3f5;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.news-box .news-box-list .news-item {
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 64px;
+  gap: 15px;
+}
+.news-box .news-box-list .news-item .time-inner-box {
+  padding: 15px 20px 15px 0;
+  border-right: solid 1px #e3e3e3;
+}
+.news-box .news-box-list .news-item .time-inner-box p {
+  font-weight: bold;
+  font-size: 23px;
+  color: #0772ed;
+  line-height: 18px;
+}
+.news-box .news-box-list .news-item .time-inner-box .year-value {
+  font-weight: bold;
+  font-size: 14px;
+  color: #747474;
+  line-height: 18px;
+  text-align: right;
+  margin-top: 4px;
+}
+.news-box .news-box-list .news-item .news-content-box {
+  flex: 1;
+  font-weight: 400;
+  font-size: 11px;
+  color: #747474;
+  line-height: 18px;
+}
+.news-box .news-box-list .news-item .news-title-inner {
+  font-weight: 500;
+  font-size: 14px;
+  color: #060a10;
+  line-height: 30px;
+}
+.news-box .news-box-list .news-item .news-content-inner {
+  height: 40px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #747474;
+  line-height: 18px;
+}
