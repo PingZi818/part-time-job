@@ -2,33 +2,53 @@ import React from "react"
 import styled from "@emotion/styled"
 import "./styles/entry-process.css"
 import { TitleBox } from "components/lib"
+import { useProcessList } from "api/home"
+import { Process } from "types/home"
 // 入驻流程
 export const EntryProcessPart = (props: any) => {
+  const { data: list } = useProcessList()
   return (
     <EntryProcessContainer>
       <EntryProcessContent>
         <TitleBox name="入驻流程" />
         <div className="process-list">
-          <ProcessItem />
-          <ProcessItem />
-          <ProcessItem />
-          <ProcessItem index={3} />
+          {list?.map((item, i) => (
+            <ProcessItem index={i} process={item} len={list.length} />
+          ))}
         </div>
       </EntryProcessContent>
     </EntryProcessContainer>
   )
 }
-const ProcessItem = (props: any) => {
+export const ProcessItem = ({
+  process,
+  index,
+  len,
+}: {
+  process: Process
+  index: number
+  len: number
+}) => {
+  const numberToChinese = (num: number) => {
+    const units = ["", "十", "百", "千", "万", "十万", "百万", "千万", "亿"]
+    const digits = ["", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
+    let result = String(num).replace(/./g, function (digit, index, array) {
+      return digits[Number(digit)] + units[array.length - index - 1]
+    })
+    return result
+  }
   return (
     <div className="process-item-container">
       <div className="process-item">
         <div
-          className={props.index === 3 ? "process-dot no-line" : "process-dot"}
+          className={index === len - 1 ? "process-dot no-line" : "process-dot"}
         ></div>
         <div className="process-description">
-          <p className="step-name">第一步 填写资质信息</p>
-          <p className="time-coverage">约30分钟</p>
-          <span>登录后提交营业执照、法人/经营者身份证明、 店铺logo等</span>
+          <p className="step-name">
+            第{numberToChinese(index + 1)}步 {process.stepTitle}
+          </p>
+          <p className="time-coverage">{process.description}</p>
+          <span>{process.secondDescription}</span>
         </div>
       </div>
     </div>
@@ -36,7 +56,7 @@ const ProcessItem = (props: any) => {
 }
 const EntryProcessContainer = styled.div`
   margin: auto;
-  width: 1200px;
+  width: 100%;
   background: #fff;
   margin-bottom: 40px;
 `

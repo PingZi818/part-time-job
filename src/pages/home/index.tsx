@@ -7,7 +7,9 @@ import { AccountListPart } from "./components/account-list"
 import { NewsListPart } from "./components/news-list"
 import { ServerDataNumPart } from "./components/serverData-num"
 import { BannerPart } from "./components/banner"
+import { useDocumentTitle } from "utils"
 export const HomePage = () => {
+  useDocumentTitle("首页", false)
   return (
     <div className="home-page">
       <HomeHeaderNavBox

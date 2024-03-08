@@ -1,42 +1,20 @@
 import React from "react"
 import "./styles/banner.css"
 import { Carousel } from "antd"
+import { useBanners } from "api/home"
 export const BannerPart = (props: any) => {
+  const { data: list } = useBanners()
   return (
     <div className="carousel-box">
       <Carousel autoplay>
-        <div>
+        {list?.map((item) => (
           <img
             height="320px"
             width="100%"
-            src="https://www.suzhou.gov.cn/szsrmzf/xhtml/static/2023/images/public/index_header_bg.png"
-            alt=""
+            src={item.bannerImgUrl}
+            alt={item.title}
           />
-        </div>
-        <div>
-          <img
-            height="320px"
-            width="100%"
-            src="https://www.suzhou.gov.cn/szsrmzf/xhtml/static/2023/images/public/index_header_bg.png"
-            alt=""
-          />
-        </div>
-        <div>
-          <img
-            height="320px"
-            width="100%"
-            src="https://www.suzhou.gov.cn/szsrmzf/xhtml/static/2023/images/public/index_header_bg.png"
-            alt=""
-          />
-        </div>
-        <div>
-          <img
-            height="320px"
-            width="100%"
-            src="https://www.suzhou.gov.cn/szsrmzf/xhtml/static/2023/images/public/index_header_bg.png"
-            alt=""
-          />
-        </div>
+        ))}
       </Carousel>
     </div>
   )

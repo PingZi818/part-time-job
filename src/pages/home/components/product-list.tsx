@@ -3,28 +3,11 @@ import styled from "@emotion/styled"
 import { Button, List } from "antd"
 import "./styles/product-list.css"
 import { TitleBox } from "components/lib"
+import { Product } from "types/home"
+import { useProductList } from "api/home"
 // 产品展示
 export const ProductListPart = (props: any) => {
-  const productListData = [
-    {
-      title: "新春走基层",
-    },
-    {
-      title: "Title 2",
-    },
-    {
-      title: "Title 3",
-    },
-    {
-      title: "Title 4",
-    },
-    {
-      title: "Title 5",
-    },
-    {
-      title: "Title 6",
-    },
-  ]
+  const { data: productListData } = useProductList()
   return (
     <ProductListContainer>
       <TitleBox name="产品展示" />

@@ -1,7 +1,6 @@
 // 在真实环境中，如果使用firebase这种第三方auth服务的话，本文件不需要开发者开发
 
 import { User } from "types/user"
-import { getMac } from "utils/androidJSBridge"
 import { setEncrypt } from "utils/encrypt"
 
 const apiUrl = process.env.REACT_APP_API_URL
@@ -21,15 +20,11 @@ export const handleUserResponse = (data: User) => {
 }
 
 export const login = (data: { userName: string; userPassword: string }) => {
-  const res = getMac()
   const loginFormParam = {
     autoLogin: "",
     userAccount: data.userName,
     userPassword: data.userPassword,
     userType: "DEVICE",
-    machineMac: res?.status
-      ? res?.data?.mac || "FF:00:00:00:00:FF"
-      : "FF:00:00:00:00:FF",
   }
   return fetch(`${apiUrl}/takeCall/login`, {
     method: "POST",

@@ -8,7 +8,7 @@ const { Header, Content, Footer } = Layout
 
 export default function LayoutBox(props: any) {
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken()
   const location = useLocation()
   const navItems = [
@@ -42,7 +42,6 @@ export default function LayoutBox(props: any) {
       </LayoutHeaderTop>
       <Header
         style={{
-          position: "sticky",
           top: 0,
           zIndex: 1,
           width: "100%",
@@ -100,8 +99,6 @@ export default function LayoutBox(props: any) {
   )
 }
 const LayoutContent = styled(Content)`
-  height: calc(100% - 293px);
-  overflow: auto;
   background: #f2f3f5;
 `
 const LayoutHeaderTop = styled.div`
@@ -112,8 +109,6 @@ const LayoutContainer = styled(Layout)`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
 `
 const MenuLabel = styled.h2`
   font-size: 18px;
